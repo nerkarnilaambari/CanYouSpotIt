@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Base palette -->
+    <color name="cafe_noir">#4C3D19</color>
+    <color name="kombu_green">#354024</color>
+    <color name="moss_green">#889063</color>
+    <color name="tan">#CFBB99</color>
+    <color name="bone">#E5D7C4</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#354024</color>
+    <color name="text_secondary">#4C3D19</color>
+    <color name="text_on_dark">#E5D7C4</color>
+
+    <!-- Verdict colors (Activity 1) -->
+    <color name="verdict_safe">#2E5931</color>
+    <color name="verdict_caution">#D47300</color>
+    <color name="verdict_scam">#8B2020</color>
+
+    <!-- Backgrounds -->
+    <color name="background_light">#E5D7C4</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="cream">#FAF3E8</color>
 </resources>
