@@ -17,8 +17,18 @@
     <color name="verdict_caution">#D47300</color>
     <color name="verdict_scam">#8B2020</color>
 
+    <!-- Learning-feedback colors (Activity 2 - Learn to Spot It correct/incorrect cards, distinct from Activity 1 verdicts) -->
+    <color name="feedback_correct">#5C6E4A</color>
+    <color name="feedback_incorrect">#A9613D</color>
+
     <!-- Backgrounds -->
     <color name="background_light">#E5D7C4</color>
     <color name="card_background">#FFFFFF</color>
     <color name="cream">#FAF3E8</color>
+
+    <!-- Additional palette -->
+    <color name="sage_mist">#A2B5A0</color>
+    <color name="slate_blue_grey">#6B7B84</color>
+    <color name="forest_shade">#1F3D2E</color>
+    <color name="background_sage">#E6E9DD</color>
 </resources>
