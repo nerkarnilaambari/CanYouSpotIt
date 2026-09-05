@@ -2,9 +2,8 @@ package com.example.canyouspotit
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +15,10 @@ class HomeActivity : AppCompatActivity() {
 
         findViewById<android.view.View>(R.id.btnGoToLearn).setOnClickListener {
             startActivity(Intent(this, LearnActivity::class.java))
+        }
+
+        findViewById<android.view.View>(R.id.btnGoToSettings).setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 }

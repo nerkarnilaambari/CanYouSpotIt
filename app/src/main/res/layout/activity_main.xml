@@ -16,8 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Let's Spot It"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.Headline"
             android:textColor="@color/forest_shade"
             android:layout_marginBottom="6dp" />
 
@@ -25,14 +24,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Paste a message to check it"
-            android:textSize="14sp"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
             android:textColor="@color/slate_blue_grey"
             android:layout_marginBottom="20dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="24dp"
             app:cardElevation="3dp"
             app:cardBackgroundColor="@color/cream"
             android:layout_marginBottom="14dp">
@@ -47,8 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Message"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
                     android:textColor="@color/forest_shade"
                     android:layout_marginBottom="8dp" />
 
@@ -59,7 +57,7 @@
                     android:minLines="4"
                     android:gravity="top"
                     android:hint="Paste the WhatsApp, SMS, or email text here"
-                    android:textSize="15sp"
+                    android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
                     android:textColor="@color/forest_shade"
                     android:textColorHint="@color/slate_blue_grey"
                     android:background="@android:color/transparent"
@@ -72,9 +70,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="24dp"
             app:cardElevation="3dp"
-            app:cardBackgroundColor="@color/cream"
+            app:cardBackgroundColor="@color/accent_periwinkle_card"
             android:layout_marginBottom="20dp">
 
             <LinearLayout
@@ -87,8 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Link (optional)"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
                     android:textColor="@color/forest_shade"
                     android:layout_marginBottom="8dp" />
 
@@ -97,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Paste a suspicious link here"
-                    android:textSize="15sp"
+                    android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
                     android:textColor="@color/forest_shade"
                     android:textColorHint="@color/slate_blue_grey"
                     android:background="@android:color/transparent"
@@ -112,15 +109,17 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="Scan"
-            android:textSize="16sp"
-            android:textColor="@color/bone"
-            android:backgroundTint="@color/kombu_green"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+            android:textColor="@color/on_accent_cta"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/accent_cta"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             style="@style/Widget.MaterialComponents.Button"
             app:cornerRadius="28dp"
             android:layout_marginBottom="20dp" />
 
+        <!-- ===== Verdict result card - colours & layout intentionally UNCHANGED ===== -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardResult"
             android:layout_width="match_parent"
@@ -163,11 +162,27 @@
                     android:text=""
                     android:textSize="14sp"
                     android:textStyle="italic"
-                    android:textColor="@color/sage_mist" />
+                    android:textColor="@color/sage_mist_text" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Continue"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+            android:textColor="@color/on_accent_cta"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/accent_cta"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            style="@style/Widget.MaterialComponents.Button"
+            app:cornerRadius="26dp"
+            android:layout_marginTop="14dp"
+            android:visibility="gone" />
 
     </LinearLayout>
 

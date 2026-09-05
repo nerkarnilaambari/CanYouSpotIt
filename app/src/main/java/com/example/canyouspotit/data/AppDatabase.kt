@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
 @Database(
     entities = [ScanResult::class, LearningSession::class, UserPreferences::class],
     // bump this whenever a table's structure changes, and add a migration for it
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -31,7 +31,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "canyouspotit_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

@@ -14,5 +14,7 @@ data class LearningSession(
     val isCorrect: Boolean,
     // used to break down accuracy stats by difficulty
     val difficultyLevel: Int,
-    val timestamp: Long
+    val timestamp: Long,
+    // ms between the card being shown and the swipe being registered
+    val decisionTimeMs: Long = 0
 )

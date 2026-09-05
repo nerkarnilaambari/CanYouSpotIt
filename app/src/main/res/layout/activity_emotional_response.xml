@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/accent_periwinkle_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:layout_marginTop="32dp">
+
+        <TextView
+            android:id="@+id/tvVerdictBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.08"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How Did That Make You Feel?"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.Headline"
+            android:textColor="@color/forest_shade"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Before knowing the verdict, how did this message make you feel?"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+            android:textColor="@color/slate_blue_grey"
+            android:layout_marginBottom="24dp" />
+
+        <LinearLayout
+            android:id="@+id/choicesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnScared"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="68dp"
+                android:text="Scared or panicked"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                android:textAllCaps="false"
+                android:textColor="@color/forest_shade"
+                android:backgroundTint="@color/sage_mist"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:gravity="start|center_vertical"
+                app:icon="@drawable/ic_emotion_scared"
+                app:iconGravity="textStart"
+                app:iconPadding="16dp"
+                app:iconSize="44dp"
+                app:iconTint="@null"
+                style="@style/Widget.MaterialComponents.Button"
+                app:cornerRadius="22dp"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnConfused"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="68dp"
+                android:text="Confused or unsure"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                android:textAllCaps="false"
+                android:textColor="@color/forest_shade"
+                android:backgroundTint="@color/accent_dusty_pink"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:gravity="start|center_vertical"
+                app:icon="@drawable/ic_emotion_confused"
+                app:iconGravity="textStart"
+                app:iconPadding="16dp"
+                app:iconSize="44dp"
+                app:iconTint="@null"
+                style="@style/Widget.MaterialComponents.Button"
+                app:cornerRadius="22dp"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnSuspicious"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="68dp"
+                android:text="Suspicious already"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                android:textAllCaps="false"
+                android:textColor="@color/forest_shade"
+                android:backgroundTint="@color/sage_mist"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:gravity="start|center_vertical"
+                app:icon="@drawable/ic_emotion_suspicious"
+                app:iconGravity="textStart"
+                app:iconPadding="16dp"
+                app:iconSize="44dp"
+                app:iconTint="@null"
+                style="@style/Widget.MaterialComponents.Button"
+                app:cornerRadius="22dp"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnNormal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="68dp"
+                android:text="Nothing unusual — seemed normal"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                android:textAllCaps="false"
+                android:textColor="@color/forest_shade"
+                android:backgroundTint="@color/accent_dusty_pink"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:gravity="start|center_vertical"
+                app:icon="@drawable/ic_emotion_neutral"
+                app:iconGravity="textStart"
+                app:iconPadding="16dp"
+                app:iconSize="44dp"
+                app:iconTint="@null"
+                style="@style/Widget.MaterialComponents.Button"
+                app:cornerRadius="22dp"
+                android:layout_marginBottom="20dp" />
+
+            <TextView
+                android:id="@+id/tvSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Skip"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+                android:textStyle="italic"
+                android:textColor="@color/slate_blue_grey"
+                android:padding="12dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/reflectionContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:cardBackgroundColor="@color/moss_green"
+                android:layout_marginBottom="20dp">
+
+                <!-- Reflection sentence: the one place in the app using Karla Medium
+                     Italic - the karla font-family resource has a single face (Medium
+                     Italic), so referencing it directly is unambiguous. Not used
+                     anywhere else. -->
+                <TextView
+                    android:id="@+id/tvReflection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/karla"
+                    android:textStyle="italic"
+                    android:textSize="15sp"
+                    android:textColor="@color/bone"
+                    android:lineSpacingExtra="5dp"
+                    android:padding="20dp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btnDone"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Done"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                android:textAllCaps="false"
+                android:textColor="@color/bone"
+                android:backgroundTint="@color/kombu_green"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                style="@style/Widget.MaterialComponents.Button"
+                app:cornerRadius="26dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_sage"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="44dp"
+        android:paddingBottom="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy &amp; data"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.Headline"
+            android:textColor="@color/forest_shade"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You can change this whenever you like."
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+            android:textColor="@color/slate_blue_grey"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Setting 1: Save my practice history. Bold label + switch on one row, muted
+             description beneath. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save my practice history"
+                android:fontFamily="@font/work_sans_bold"
+                android:textSize="17sp"
+                android:textColor="@color/forest_shade" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchDataSaving"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:useMaterialThemeColors="false"
+                app:thumbTint="@color/kombu_green"
+                app:trackTint="@color/moss_green" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="When this is on, your scans and practice results are kept on this device so the app can show your progress over time. When it's off, nothing is saved and the app won't remember your progress. Nothing ever leaves your phone either way."
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+            android:textColor="@color/slate_blue_grey"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginTop="10dp" />
+
+        <!-- Setting 2: Export. Wrapped in a container the Activity shows/hides as one unit
+             (updateExportVisibility toggles R.id.cardExport) - the leading divider lives
+             inside it so it disappears with the section when saving is off. -->
+        <LinearLayout
+            android:id="@+id/cardExport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Export my data"
+                android:fontFamily="@font/work_sans_bold"
+                android:textSize="17sp"
+                android:textColor="@color/forest_shade" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save everything stored on this device as a single file, so you can send it to the research team. This only happens when you tap the button below."
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+                android:textColor="@color/slate_blue_grey"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/btnExport"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="18dp"
+                android:text="Export My Data"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                android:textAllCaps="false"
+                android:textColor="@color/on_accent_cta"
+                android:backgroundTint="@color/accent_cta"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                style="@style/Widget.MaterialComponents.Button"
+                app:cornerRadius="26dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

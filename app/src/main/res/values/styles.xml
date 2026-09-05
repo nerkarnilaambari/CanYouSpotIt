@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Redesign Phase 1 typography. Purely typographic (family / weight / size / spacing);
+         a default text colour is included since forest_shade is the app's DayNight-aware
+         primary text colour everywhere - layouts override it where the surface demands
+         (e.g. text on the hero gradient). -->
+    <style name="TextAppearance.CanYouSpotIt" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/work_sans</item>
+        <item name="fontFamily">@font/work_sans</item>
+        <item name="android:textColor">@color/forest_shade</item>
+    </style>
+
+    <!-- Hero title. Work Sans Bold. -->
+    <style name="TextAppearance.CanYouSpotIt.Headline">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <!-- Supporting / descriptive copy (eyebrow, subtitle, secondary-card description).
+         Work Sans Regular (400). Points straight at the 400 face so the weight is exact,
+         not left to family resolution. -->
+    <style name="TextAppearance.CanYouSpotIt.Body">
+        <item name="android:fontFamily">@font/work_sans_regular</item>
+        <item name="fontFamily">@font/work_sans_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+    </style>
+
+    <!-- Button labels and the secondary-card title. Work Sans Medium (500) - a step up
+         from Body so these read as slightly more prominent without going full bold.
+         Points straight at the 500 face for an exact weight. -->
+    <style name="TextAppearance.CanYouSpotIt.ButtonLabel">
+        <item name="android:fontFamily">@font/work_sans_medium</item>
+        <item name="fontFamily">@font/work_sans_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Activity 3 reflection sentences ONLY. Karla Medium Italic. Defined now so it is
+         ready for a later phase - deliberately not applied anywhere in Phase 1. -->
+    <style name="TextAppearance.CanYouSpotIt.Reflection" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/karla</item>
+        <item name="fontFamily">@font/karla</item>
+        <item name="android:textColor">@color/forest_shade</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+
+</resources>

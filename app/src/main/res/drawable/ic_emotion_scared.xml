@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Emotion-response face icon: "Scared or panicked". Deliberately abstract line art -
+     not an emoji, cartoon character, or gendered face. Thin single-weight stroke only,
+     no fill. Reuses forest_shade (the app's DayNight-aware ink color) so it re-tints
+     with theme automatically. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Head: oval outline, centered ~(100,95), ~104 wide x 130 tall -->
+    <path
+        android:pathData="M48,95 A52,65 0 1 0 152,95 A52,65 0 1 0 48,95"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+    <!-- Eyebrows: both angled upward-and-inward (alert / mildly startled) -->
+    <path
+        android:pathData="M66,86 L90,74"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M134,86 L110,74"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+    <!-- Eyes: small round open circles -->
+    <path
+        android:pathData="M71,97 A7,7 0 1 0 85,97 A7,7 0 1 0 71,97"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M115,97 A7,7 0 1 0 129,97 A7,7 0 1 0 115,97"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+    <!-- Mouth: small open oval - mild surprise/alertness, not intense fear -->
+    <path
+        android:pathData="M91,132 A9,12 0 1 0 109,132 A9,12 0 1 0 91,132"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+</vector>

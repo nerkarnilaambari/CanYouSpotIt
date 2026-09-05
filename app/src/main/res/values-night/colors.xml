@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backgrounds -->
+    <color name="background_sage">#262B18</color>
+    <color name="cream">#3D3320</color>
+
+    <!-- sage_mist stays background-only (Home's "Learn" card, item_scam_card,
+         Consent card 2, Learn's stacked deck card). sage_mist_text is the split-off
+         text-on-colored-card role (tvActionStep and its analog on resultCard) -
+         needs to stay meaningfully lighter than moss_green's dark value for contrast,
+         so it can't reuse sage_mist's tuned-for-backgrounds value here. -->
+    <color name="sage_mist">#3F4A32</color>
+    <color name="sage_mist_text">#D9E0C9</color>
+
+    <color name="moss_green">#4A5236</color>
+    <color name="bone">#E5D7C4</color>
+
+    <!-- Button backgrounds: lightened from light mode's near-black so primary/secondary
+         buttons don't vanish into the dark screen background. -->
+    <color name="kombu_green">#6B7548</color>
+    <color name="cafe_noir">#5C4A26</color>
+
+    <!-- Text colors. forest_shade now equals bone directly - both are the same warm
+         off-white in dark mode, no separate near-white needed. -->
+    <color name="forest_shade">#E5D7C4</color>
+    <color name="slate_blue_grey">#8B9CA0</color>
+
+    <!-- Verdict colors (Activity 1) -->
+    <color name="verdict_safe">#3D7548</color>
+    <color name="verdict_caution">#C97F33</color>
+    <color name="verdict_scam">#A83636</color>
+
+    <!-- Redesign Phase 1: Home hero + accents (dark). -->
+    <color name="hero_gradient_start">#141C12</color>
+    <color name="hero_gradient_end">#5A3A42</color>
+    <!-- Dark-mode lilac secondary-card fill. -->
+    <color name="accent_secondary">#3D3448</color>
+    <color name="accent_cta">@color/kombu_green</color>
+    <color name="on_accent_cta">@color/bone</color>
+
+    <!-- Hairline separator between stacked settings rows - white at low alpha so it reads
+         as a quiet line over the dark background_sage. -->
+    <color name="divider">#26FFFFFF</color>
+
+    <!-- Phase: per-screen accent themes (dark). Deep desaturated versions of the light
+         pairs - lilac -> Consent, dusty pink -> Learn, periwinkle -> Scanner's Link field.
+         Emotional Response mixes dusty pink with the existing sage_mist. -->
+    <color name="accent_lilac_bg">#2A2436</color>
+    <color name="accent_lilac_card">#423854</color>
+    <color name="accent_dusty_pink_bg">#302026</color>
+    <color name="accent_dusty_pink">#4E323A</color>
+    <color name="accent_periwinkle_bg">#1E2034</color>
+    <color name="accent_periwinkle_card">#343656</color>
+
+    <!-- Learn to Spot It's main swipe card, dark mode only. A richer, more saturated
+         indigo-periwinkle than accent_periwinkle_card (the difficulty chip on the same
+         screen) so the two never blend. Deliberately NOT green: a sage/green card read
+         too close to verdict_safe and risked signalling "this one's safe" before the
+         user has judged the example. -->
+    <color name="accent_periwinkle_deep">#514C99</color>
+
+    <!-- Learn swipe-card fill: theme alias. Light = sage_mist (green is fine there,
+         no verdict_safe confusion); dark = accent_periwinkle_deep. -->
+    <color name="learn_swipe_card">@color/accent_periwinkle_deep</color>
+
+    <!-- Category-recap dialog card fill: dark reverts to cream (the pre-palette-pass
+         colour) so the olive "Got it" button keeps enough contrast against the card. -->
+    <color name="recap_dialog_card">@color/cream</color>
+</resources>

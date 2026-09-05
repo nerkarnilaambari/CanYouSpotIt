@@ -32,4 +32,9 @@ interface ScanResultDao {
     // same trick as above, just skips scans that never got an emotion logged
     @Query("SELECT emotionalResponse FROM scan_results WHERE emotionalResponse IS NOT NULL GROUP BY emotionalResponse ORDER BY COUNT(*) DESC LIMIT 1")
     suspend fun getMostCommonEmotion(): String?
+
+    // wipes the whole scan history - used when a user turns data saving off and opts to
+    // delete what was already saved
+    @Query("DELETE FROM scan_results")
+    suspend fun deleteAll()
 }

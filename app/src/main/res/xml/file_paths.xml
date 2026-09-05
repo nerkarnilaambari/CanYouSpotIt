@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FileProvider scope for sharing exported data. Only the exports/ subfolder of the
+     app's private cache is exposed, and only as a temporary read grant to the app the
+     user picks from the share sheet. -->
+<paths>
+    <cache-path
+        name="exports"
+        path="exports/" />
+</paths>

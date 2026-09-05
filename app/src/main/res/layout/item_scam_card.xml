@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         app:cardCornerRadius="24dp"
         app:cardElevation="1dp"
-        app:cardBackgroundColor="@color/sage_mist">
+        app:cardBackgroundColor="@color/learn_swipe_card">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,8 +24,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textSize="17sp"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
                 android:textColor="@color/forest_shade"
+                android:textSize="16sp"
                 android:lineSpacingExtra="6dp" />
 
         </LinearLayout>

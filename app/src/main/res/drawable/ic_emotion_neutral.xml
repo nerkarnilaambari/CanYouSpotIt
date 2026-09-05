@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Emotion-response face icon: "Nothing unusual". Deliberately abstract line art -
+     not an emoji, cartoon character, or gendered face. Thin single-weight stroke only,
+     no fill. Reuses forest_shade (the app's DayNight-aware ink color). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Head: oval outline, centered ~(100,95), ~104 wide x 130 tall -->
+    <path
+        android:pathData="M48,95 A52,65 0 1 0 152,95 A52,65 0 1 0 48,95"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+    <!-- Eyebrows: both flat and level -->
+    <path
+        android:pathData="M67,76 L89,76"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M111,76 L133,76"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+    <!-- Eyes: gentle downward-curving arcs -->
+    <path
+        android:pathData="M70,96 Q78,104 86,96"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M114,96 Q122,104 130,96"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+    <!-- Mouth: soft closed upward-curving smile -->
+    <path
+        android:pathData="M84,128 Q100,140 116,128"
+        android:strokeColor="@color/forest_shade"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+
+</vector>

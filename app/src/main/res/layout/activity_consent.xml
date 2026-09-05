@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_sage">
+    android:background="@color/accent_lilac_bg"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,17 +18,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Can You Spot It?"
-            android:textSize="26sp"
-            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.Headline"
             android:textColor="@color/forest_shade"
             android:layout_marginBottom="28dp" />
 
+        <!-- Intro card -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="24dp"
             app:cardElevation="3dp"
-            app:cardBackgroundColor="@color/sage_mist"
+            app:cardBackgroundColor="@color/accent_lilac_card"
             android:layout_marginBottom="16dp">
 
             <LinearLayout
@@ -41,15 +42,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Before we start"
-                    android:textSize="21sp"
-                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
                     android:textColor="@color/forest_shade"
-                    android:layout_marginBottom="12dp" /><TextView
+                    android:textSize="18sp"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
                     android:id="@+id/tvConsentBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="We check your messages to help you spot scams — right here on your phone."
-                    android:textSize="15sp"
+                    android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
                     android:textColor="@color/forest_shade"
                     android:lineSpacingExtra="6dp" />
 
@@ -57,12 +60,16 @@
 
         </androidx.cardview.widget.CardView>
 
+        <!-- Privacy-details card. accent_dusty_pink fill against the accent_lilac_bg screen -
+             a warm/cool pairing that carries its own separation, so this is back to the
+             standard 3dp elevation (the earlier 6dp shadow-lift was for the old low-contrast
+             sage_mist-on-background_sage combination, which no longer exists here). -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="24dp"
             app:cardElevation="3dp"
-            app:cardBackgroundColor="@color/moss_green"
+            app:cardBackgroundColor="@color/accent_dusty_pink"
             android:layout_marginBottom="32dp">
 
             <LinearLayout
@@ -75,17 +82,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Your privacy"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/bone"
+                    android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                    android:textColor="@color/forest_shade"
+                    android:textSize="18sp"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="If you agree, we save your scan results on this device only, to help track your progress over time. Nothing is ever sent anywhere else, and nothing leaves your phone."
-                    android:textSize="15sp"
-                    android:textColor="@color/bone"
+                    android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+                    android:textColor="@color/forest_shade"
                     android:lineSpacingExtra="6dp" />
 
             </LinearLayout>
@@ -97,9 +104,10 @@
             android:layout_width="280dp"
             android:layout_height="52dp"
             android:text="Agree and Continue"
-            android:textSize="15sp"
-            android:textColor="@color/bone"
-            android:backgroundTint="@color/kombu_green"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+            android:textColor="@color/on_accent_cta"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/accent_cta"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             style="@style/Widget.MaterialComponents.Button"
@@ -111,13 +119,26 @@
             android:layout_width="280dp"
             android:layout_height="52dp"
             android:text="Use Without Saving Data"
-            android:textSize="14sp"
-            android:textColor="@color/bone"
-            android:backgroundTint="@color/cafe_noir"
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+            android:textColor="@color/forest_shade"
+            android:textAllCaps="false"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            style="@style/Widget.MaterialComponents.Button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/forest_shade"
+            app:strokeWidth="1.5dp"
             app:cornerRadius="26dp" />
+
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="Your practice history won't be saved, so the app won't remember your progress."
+            android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+            android:textColor="@color/forest_shade"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginTop="12dp" />
 
     </LinearLayout>
 

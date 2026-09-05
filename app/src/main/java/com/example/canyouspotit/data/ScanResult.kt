@@ -14,5 +14,9 @@ data class ScanResult(
     val verdict: String,
     val timestamp: Long,
     // nullable since not every scan has this filled in
-    val emotionalResponse: String? = null
+    val emotionalResponse: String? = null,
+    // "URGENCY" / "REWARD" / "THREAT" — whichever manipulation tactic dominated the
+    // scan's flags. Always null for SAFE verdicts, even if a flag briefly tripped
+    // before legitimate-phrase deductions brought the score back down.
+    val primaryTactic: String? = null
 )

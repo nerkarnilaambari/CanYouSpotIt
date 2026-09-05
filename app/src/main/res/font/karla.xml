@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Karla family - a single Medium Italic face. Reserved for Activity 3's reflection
+     sentences (a later redesign phase); not applied anywhere in Phase 1. -->
+<font-family
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="500"
+        android:font="@font/karla_medium_italic"
+        app:fontStyle="italic"
+        app:fontWeight="500"
+        app:font="@font/karla_medium_italic" />
+
+</font-family>

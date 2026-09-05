@@ -16,4 +16,14 @@ interface UserPreferencesDao {
     // grabbed on app startup to load whatever the user had set
     @Query("SELECT * FROM user_preferences WHERE id = 1")
     suspend fun get(): UserPreferences?
+
+    // every row (in practice just the one) - used by the data export, which serialises
+    // all three tables uniformly as lists
+    @Query("SELECT * FROM user_preferences")
+    suspend fun getAll(): List<UserPreferences>
+
+    // wipes the stored preferences row - used when a user turns data saving off and opts
+    // to delete what was already saved
+    @Query("DELETE FROM user_preferences")
+    suspend fun deleteAll()
 }

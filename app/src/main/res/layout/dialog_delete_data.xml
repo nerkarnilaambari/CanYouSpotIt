@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shown when the user turns "Save my practice history" off. Saving has already stopped;
+     this asks, as a genuine choice, whether to also remove what was saved before.
+     Styled to the app's palette - deliberately not a system AlertDialog. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="28dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/cream">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="28dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Also delete what's already been saved?"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.Headline"
+                android:textSize="20sp"
+                android:textColor="@color/forest_shade"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Saving is now off. You can also remove the scans and practice history already stored on this device, or leave them as they are."
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+                android:textColor="@color/forest_shade"
+                android:lineSpacingExtra="5dp"
+                android:layout_marginBottom="24dp" />
+
+            <Button
+                android:id="@+id/btnDeleteData"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Delete it"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                android:textSize="15sp"
+                android:textAllCaps="false"
+                android:textColor="@color/bone"
+                android:backgroundTint="@color/cafe_noir"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                style="@style/Widget.MaterialComponents.Button"
+                app:cornerRadius="26dp"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnKeepData"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Keep it"
+                android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                android:textSize="15sp"
+                android:textAllCaps="false"
+                android:textColor="@color/bone"
+                android:backgroundTint="@color/kombu_green"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                style="@style/Widget.MaterialComponents.Button"
+                app:cornerRadius="26dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
