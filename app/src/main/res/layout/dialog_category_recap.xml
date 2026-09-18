@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- All-time category recap, shown as a styled Dialog when leaving the Learn screen.
-     Card fill is a theme alias (recap_dialog_card): light = accent_dusty_pink to tie
-     into Learn's theme; dark = cream, because on the dark palette the dusty-pink card
-     left too little contrast with the olive "Got it" button. Work Sans typography,
-     standard accent_cta button. Deliberately NOT a default system AlertDialog. -->
+     Card fill (recap_dialog_card) is a theme alias. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -26,21 +23,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You're getting good at spotting:"
+                android:text="How much you've practised spotting:"
                 android:fontFamily="@font/work_sans_bold"
                 android:textSize="20sp"
                 android:textColor="@color/forest_shade"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="18dp" />
 
-            <TextView
-                android:id="@+id/tvRecapCategories"
+            <!-- One row per practised scam category, populated at runtime by
+                 LearnActivity.showCategoryRecap (bar length = attempt count). -->
+            <LinearLayout
+                android:id="@+id/recapChartContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
-                android:textColor="@color/forest_shade"
-                android:textSize="16sp"
-                android:lineSpacingExtra="8dp"
+                android:orientation="vertical"
                 android:layout_marginBottom="24dp" />
 
             <Button

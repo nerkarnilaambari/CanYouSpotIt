@@ -3,20 +3,19 @@ package com.example.canyouspotit.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// One row = one scan the user ran. We keep these for history and for stats
-// like "what's the most common verdict you've gotten".
+// One row = one scan the user ran. Kept for history and verdict/emotion stats.
 @Entity(tableName = "scan_results")
 data class ScanResult(
-    // Room fills this in automatically, that's why it defaults to 0.
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val messageText: String,
-    // e.g. "safe" or "scam"
-    val verdict: String,
+    val verdict: String,   // "SAFE" / "CAUTION" / "SCAM"
     val timestamp: Long,
-    // nullable since not every scan has this filled in
+    // null if the user skipped the emotion step
     val emotionalResponse: String? = null,
-    // "URGENCY" / "REWARD" / "THREAT" — whichever manipulation tactic dominated the
-    // scan's flags. Always null for SAFE verdicts, even if a flag briefly tripped
-    // before legitimate-phrase deductions brought the score back down.
-    val primaryTactic: String? = null
+    // "URGENCY" / "REWARD" / "THREAT" - the dominant tactic among the scan's flags.
+    // Always null for SAFE.
+    val primaryTactic: String? = null,
+    // Optional free-text note from the emotional-response screen, alongside the emotion.
+    // Null when left blank / skipped.
+    val emotionalResponseNote: String? = null
 )

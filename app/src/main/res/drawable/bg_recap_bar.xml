@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fill for the category-recap bars. Uses forest_shade (DayNight). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/forest_shade" />
+    <corners android:radius="4dp" />
+</shape>

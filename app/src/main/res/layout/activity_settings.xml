@@ -31,8 +31,7 @@
             android:textColor="@color/slate_blue_grey"
             android:layout_marginBottom="28dp" />
 
-        <!-- Setting 1: Save my practice history. Bold label + switch on one row, muted
-             description beneath. -->
+        <!-- Setting 1: Save my practice history. -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,9 +66,8 @@
             android:lineSpacingExtra="4dp"
             android:layout_marginTop="10dp" />
 
-        <!-- Setting 2: Export. Wrapped in a container the Activity shows/hides as one unit
-             (updateExportVisibility toggles R.id.cardExport) - the leading divider lives
-             inside it so it disappears with the section when saving is off. -->
+        <!-- Setting 2: Export. The Activity shows/hides this whole container as one unit;
+             the leading divider is inside it. -->
         <LinearLayout
             android:id="@+id/cardExport"
             android:layout_width="match_parent"

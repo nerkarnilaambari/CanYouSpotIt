@@ -3,18 +3,14 @@ package com.example.canyouspotit.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// One row = one practice question attempt, so we can track progress and accuracy over time.
+// One row = one practice-card attempt. Backs difficulty progression and the category recap.
 @Entity(tableName = "learning_sessions")
 data class LearningSession(
-    // Room fills this in automatically, that's why it defaults to 0.
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    // which practice example this attempt was for
-    val exampleId: Int,
-    val userAnswer: String,
+    val exampleId: Int,        // a ScamExample.id in the static scamExamples list
+    val userAnswer: String,    // "Legitimate" or "Scam"
     val isCorrect: Boolean,
-    // used to break down accuracy stats by difficulty
     val difficultyLevel: Int,
     val timestamp: Long,
-    // ms between the card being shown and the swipe being registered
-    val decisionTimeMs: Long = 0
+    val decisionTimeMs: Long = 0   // card shown -> swipe registered; feeds the "too fast" nudge
 )

@@ -3,7 +3,6 @@ package com.example.canyouspotit.classifier
 // Keyword tiers built from real phrases found in the project's 193-row
 // curated scam/legitimate message dataset (English, Hinglish, German).
 // Hinglish = Hindi words spelled in Latin letters (e.g. "turant", "badhai ho") — NOT Devanagari script.
-
 object PhishingClassifier {
 
     // ---------- ENGLISH ----------
@@ -89,9 +88,13 @@ object PhishingClassifier {
     private val allThreats = threatIndicatorsEnglish + threatIndicatorsHinglish + threatIndicatorsGerman
     private val allLegitimate = legitimateIndicatorsEnglish + legitimateIndicatorsHinglish + legitimateIndicatorsGerman
 
+    // Substring match, case-insensitive. Urgency +3, reward/threat +2, legit phrase -2;
+    // verdict comes from the score and the flag count (see the when below).
     fun classify(message: String): ClassificationResult {
         val lower = message.lowercase()
         var score = 0
+        // The "Urgency detected: " / "Reward lure: " / "Suspicious indicator: " prefixes are
+        // load-bearing: ScannerActivity matches on them to pick the dominant tactic.
         val flags = mutableListOf<String>()
 
         allUrgency.forEach { phrase ->
@@ -117,9 +120,7 @@ object PhishingClassifier {
         }
 
         return when {
-            // A single flag alone — however it's weighted — shouldn't be enough to
-            // trigger CAUTION or SCAM. Real personal messages ("its urgent please
-            // call me") can trip one generic phrase without being remotely scammy.
+            // Fewer than 2 flags is always SAFE, whatever the score.
             flags.size < 2 -> ClassificationResult(
                 "SAFE", score, flags,
                 "This message appears safe, but it's always good to stay alert."
@@ -132,6 +133,7 @@ object PhishingClassifier {
                 "CAUTION", score, flags,
                 "This message has a few things that don't look quite right."
             )
+            // 2+ flags but score below the CAUTION threshold -> SAFE.
             else -> ClassificationResult(
                 "SAFE", score, flags,
                 "This message appears safe, but it's always good to stay alert."
@@ -141,7 +143,7 @@ object PhishingClassifier {
 }
 
 data class ClassificationResult(
-    val verdict: String,
+    val verdict: String,          // "SAFE" / "CAUTION" / "SCAM"
     val score: Int,
     val flags: List<String>,
     val explanation: String

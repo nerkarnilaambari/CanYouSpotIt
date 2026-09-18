@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Home hero background. Vertical (top -> bottom): hero_gradient_start at the top,
-     hero_gradient_end at the bottom. angle 270 = straight down, which dithers most
-     smoothly of the GradientDrawable orientations. Bottom corners rounded so the hero
-     reads as a distinct panel above the sage background. -->
+<!-- Home hero background. Vertical top->bottom (hero_gradient_start -> _end), angle 270.
+     Bottom corners rounded. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 

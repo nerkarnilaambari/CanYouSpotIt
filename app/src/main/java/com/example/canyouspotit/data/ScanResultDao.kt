@@ -2,39 +2,37 @@ package com.example.canyouspotit.data
 
 import androidx.room.*
 
-// DAO = the interface Room uses to generate our actual SQL calls, so we don't write them by hand.
-// Everything's a suspend fun since DB calls shouldn't run on the main thread.
+// Room generates the SQL from these annotations. All suspend - no DB work on the main thread.
 @Dao
 interface ScanResultDao {
-    // called after a scan finishes, saves the result and hands back the new row's id
+    // Returns the new row's id.
     @Insert
     suspend fun insert(scanResult: ScanResult): Long
 
-    // for when a saved scan changes later, e.g. user adds an emotional response
     @Update
     suspend fun update(scanResult: ScanResult)
 
-    // full scan history, newest first
+    // Targeted UPDATE of just the note column.
+    @Query("UPDATE scan_results SET emotionalResponseNote = :note WHERE id = :id")
+    suspend fun updateNote(id: Int, note: String?)
+
     @Query("SELECT * FROM scan_results ORDER BY timestamp DESC")
     suspend fun getAll(): List<ScanResult>
 
-    // pulls up one specific past scan
     @Query("SELECT * FROM scan_results WHERE id = :id")
     suspend fun getById(id: Int): ScanResult?
 
+    // Stats helpers - unused so far.
     @Query("SELECT COUNT(*) FROM scan_results")
     suspend fun getCount(): Int
 
-    // GROUP BY + ORDER BY COUNT DESC LIMIT 1 = "whichever verdict shows up most"
     @Query("SELECT verdict FROM scan_results GROUP BY verdict ORDER BY COUNT(*) DESC LIMIT 1")
     suspend fun getMostCommonVerdict(): String?
 
-    // same trick as above, just skips scans that never got an emotion logged
     @Query("SELECT emotionalResponse FROM scan_results WHERE emotionalResponse IS NOT NULL GROUP BY emotionalResponse ORDER BY COUNT(*) DESC LIMIT 1")
     suspend fun getMostCommonEmotion(): String?
 
-    // wipes the whole scan history - used when a user turns data saving off and opts to
-    // delete what was already saved
+    // Used when the user turns data saving off and opts to delete what was already saved.
     @Query("DELETE FROM scan_results")
     suspend fun deleteAll()
 }

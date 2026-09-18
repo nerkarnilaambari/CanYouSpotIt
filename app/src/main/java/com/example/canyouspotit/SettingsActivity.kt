@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -27,12 +28,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-// Lets the user change the data-saving choice they first made on the consent screen -
-// in both directions, including full withdrawal (turn off + delete everything saved) -
-// and, since the app is fully offline, export what's saved so it can be sent to the
-// research team.
-// Writes the same app_prefs / "data_collection_enabled" key that BaseActivity's
-// isDataCollectionEnabled() reads to gate every Room write.
+// Change the consent-screen data choice either way (including full withdrawal: turn saving
+// off, then optionally delete everything), and export what's saved. Toggles the same
+// app_prefs/"data_collection_enabled" that isDataCollectionEnabled() gates Room writes on.
 class SettingsActivity : BaseActivity() {
 
     private val db by lazy { AppDatabase.getDatabase(this) }
@@ -45,8 +43,7 @@ class SettingsActivity : BaseActivity() {
         val switch = findViewById<SwitchMaterial>(R.id.switchDataSaving)
         cardExport = findViewById(R.id.cardExport)
 
-        // Reflect the stored choice first, THEN attach the listener, so this initial
-        // sync doesn't count as a user toggle.
+        // Set the switch to the stored value, then attach the listener.
         switch.isChecked = isDataCollectionEnabled()
         updateExportVisibility()
 
@@ -62,8 +59,8 @@ class SettingsActivity : BaseActivity() {
             if (isChecked) {
                 showThemedSnackbar("Your practice history will be saved from now on.")
             } else {
-                // Saving has already stopped; deleting the existing history is a separate,
-                // explicit choice.
+                // Saving has already stopped here; the dialog then asks whether to delete
+                // existing history.
                 showDeleteChoiceDialog()
             }
         }
@@ -73,13 +70,11 @@ class SettingsActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        // In case the flag was changed elsewhere (e.g. the consent screen) since this
-        // screen was created.
+        // The flag may have changed elsewhere (e.g. the consent screen) since onCreate.
         updateExportVisibility()
     }
 
-    // A user who chose not to save data has nothing to export, and offering it would
-    // undercut that choice - so the whole card is hidden while saving is off.
+    // The export card is shown only while saving is on.
     private fun updateExportVisibility() {
         cardExport.visibility = if (isDataCollectionEnabled()) View.VISIBLE else View.GONE
     }
@@ -98,7 +93,7 @@ class SettingsActivity : BaseActivity() {
             )
         }
 
-        // Backing out without choosing = keep (saving is already off regardless).
+        // Backing out without choosing keeps the saved history.
         dialog.setOnCancelListener {
             showThemedSnackbar("Saving is off. Your saved history is kept.")
         }
@@ -121,7 +116,7 @@ class SettingsActivity : BaseActivity() {
             db.scanResultDao().deleteAll()
             db.learningSessionDao().deleteAll()
             db.userPreferencesDao().deleteAll()
-            // Back on the main thread here (lifecycleScope + suspend DAO calls).
+            // Back on the main thread here.
             showThemedSnackbar("Your saved history has been deleted.")
         }
     }
@@ -135,10 +130,8 @@ class SettingsActivity : BaseActivity() {
                 val sessions = db.learningSessionDao().getAll()
                 val prefs = db.userPreferencesDao().getAll()
 
-                // user_preferences always holds one row once consent is given - it's a
-                // settings singleton, not participant activity - so "nothing to export" is
-                // judged on the two history tables. (prefs is still included in the file
-                // below when there IS history worth sending.)
+                // user_preferences always has a row post-consent. The emptiness check looks
+                // only at scans and sessions; prefs still goes in the file below.
                 if (scans.isEmpty() && sessions.isEmpty()) {
                     showThemedSnackbar("There's nothing saved to export yet.")
                     return@launch
@@ -195,6 +188,7 @@ class SettingsActivity : BaseActivity() {
                     put("verdict", s.verdict)
                     put("timestamp", s.timestamp)
                     put("emotionalResponse", s.emotionalResponse ?: JSONObject.NULL)
+                    put("emotionalResponseNote", s.emotionalResponseNote ?: JSONObject.NULL)
                     put("primaryTactic", s.primaryTactic ?: JSONObject.NULL)
                 })
             }
@@ -220,11 +214,25 @@ class SettingsActivity : BaseActivity() {
                     put("id", p.id)
                     put("consentGiven", p.consentGiven)
                     put("detectedRegion", p.detectedRegion)
-                    put("useDarkMode", p.useDarkMode)
                 })
             }
         })
 
         return root.toString(2)
+    }
+
+    // --- Result for Home ------------------------------------------------------
+
+    // Every exit path — back gesture included — hands Home the current flag.
+    override fun finish() {
+        val enabled = isDataCollectionEnabled()
+        Log.d(TAG, "Returning result to Home: data_collection_enabled=$enabled")
+        setResult(RESULT_OK, Intent().putExtra(EXTRA_DATA_COLLECTION_ENABLED, enabled))
+        super.finish()
+    }
+
+    companion object {
+        const val EXTRA_DATA_COLLECTION_ENABLED = "data_collection_enabled"
+        private const val TAG = "SettingsActivity"
     }
 }

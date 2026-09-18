@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:layout_marginTop="32dp">
+        android:padding="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,6 +17,7 @@
             android:text="Let's Spot It"
             android:textAppearance="@style/TextAppearance.CanYouSpotIt.Headline"
             android:textColor="@color/forest_shade"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="6dp" />
 
         <TextView
@@ -26,21 +26,22 @@
             android:text="Paste a message to check it"
             android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
             android:textColor="@color/slate_blue_grey"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="14dp" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="24dp"
             app:cardElevation="3dp"
             app:cardBackgroundColor="@color/cream"
-            android:layout_marginBottom="14dp">
+            android:layout_marginBottom="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -55,6 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minLines="4"
+                    android:maxLines="6"
                     android:gravity="top"
                     android:hint="Paste the WhatsApp, SMS, or email text here"
                     android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
@@ -68,18 +70,19 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="24dp"
             app:cardElevation="3dp"
             app:cardBackgroundColor="@color/accent_periwinkle_card"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -117,9 +120,9 @@
             android:insetBottom="0dp"
             style="@style/Widget.MaterialComponents.Button"
             app:cornerRadius="28dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="14dp" />
 
-        <!-- ===== Verdict result card - colours & layout intentionally UNCHANGED ===== -->
+        <!-- ===== Verdict result card ===== -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardResult"
             android:layout_width="match_parent"
@@ -155,6 +158,7 @@
                     android:lineSpacingExtra="5dp"
                     android:layout_marginBottom="6dp" />
 
+                <!-- textColor is set per-verdict in ScannerActivity; this is just the design-time default. -->
                 <TextView
                     android:id="@+id/tvActionStep"
                     android:layout_width="match_parent"
@@ -162,7 +166,7 @@
                     android:text=""
                     android:textSize="14sp"
                     android:textStyle="italic"
-                    android:textColor="@color/sage_mist_text" />
+                    android:textColor="@color/verdict_safe_action" />
 
             </LinearLayout>
 

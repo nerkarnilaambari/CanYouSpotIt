@@ -4,63 +4,56 @@
     <color name="cafe_noir">#4C3D19</color>
     <color name="kombu_green">#354024</color>
     <color name="moss_green">#889063</color>
-    <color name="tan">#CFBB99</color>
     <color name="bone">#E5D7C4</color>
-
-    <!-- Text colors -->
-    <color name="text_primary">#354024</color>
-    <color name="text_secondary">#4C3D19</color>
-    <color name="text_on_dark">#E5D7C4</color>
 
     <!-- Verdict colors (Activity 1) -->
     <color name="verdict_safe">#2E5931</color>
     <color name="verdict_caution">#D47300</color>
     <color name="verdict_scam">#8B2020</color>
 
-    <!-- Learning-feedback colors (Activity 2 - Learn to Spot It correct/incorrect cards, distinct from Activity 1 verdicts) -->
-    <color name="feedback_correct">#5C6E4A</color>
-    <color name="feedback_incorrect">#A9613D</color>
+    <!-- Action-step text, one per verdict. CAUTION's is dark, the rest light. -->
+    <color name="verdict_safe_action">#EFE8DA</color>
+    <color name="verdict_caution_action">#241100</color>
+    <color name="verdict_scam_action">#F4E9E1</color>
+
+    <!-- Verdict colour as text on the periwinkle badge. -->
+    <color name="verdict_safe_badge">#2E5931</color>
+    <color name="verdict_caution_badge">#7A4100</color>
+    <color name="verdict_scam_badge">#8B2020</color>
+
+    <!-- Near-black in light mode; values-night keeps bone. -->
+    <color name="reflection_text">#16240F</color>
 
     <!-- Backgrounds -->
-    <color name="background_light">#E5D7C4</color>
-    <color name="card_background">#FFFFFF</color>
     <color name="cream">#FAF3E8</color>
 
     <!-- Additional palette -->
     <color name="sage_mist">#A2B5A0</color>
-    <!-- Split from sage_mist: this one is for text-on-colored-card (tvActionStep and its
-         analog on resultCard), sage_mist stays background-only. Same value in light mode,
-         diverges in values-night since backgrounds darken but text needs to stay light. -->
+    <!-- Matches sage_mist in light mode; lighter in values-night for text on coloured cards. -->
     <color name="sage_mist_text">#A2B5A0</color>
-    <!-- Darkened (was #6B7B84) so subtitle text keeps >=3:1 against the deepened
-         background_sage below; same blue-grey hue. Light mode only - values-night keeps
-         its own lighter value for the dark background. -->
     <color name="slate_blue_grey">#57636B</color>
     <color name="forest_shade">#1F3D2E</color>
-    <!-- Deepened from #E6E9DD (relative luminance 0.80 -> 0.55): the old value read as
-         near-white / glare-inducing on-device. App-wide (every screen's root background). -->
+
+    <!-- Launcher-icon colours; no values-night variant. -->
+    <color name="ic_launcher_bg">#1F3D2E</color>
+    <color name="ic_launcher_bars">#E5D7C4</color>
+    <!-- App-wide screen background. -->
     <color name="background_sage">#C2C4B9</color>
 
-    <!-- Redesign Phase 1: Home hero + accents.
-         Existing resources are reused as aliases where the redesign spec reuses a value. -->
+    <!-- Home hero + accents. -->
     <color name="hero_gradient_start">@color/forest_shade</color>
     <color name="hero_gradient_end">#C98FA0</color>
     <!-- Lilac secondary-card fill. -->
     <color name="accent_secondary">#A896BE</color>
     <color name="accent_cta">@color/kombu_green</color>
     <color name="on_accent_cta">@color/bone</color>
-    <!-- Frosted overlay for the small circular settings chip in the hero. Same value serves
-         both themes: it composites to a legible mid-tone over either hero gradient. -->
+    <!-- Translucent white, for the hero settings chip. -->
     <color name="chip_bg">#33FFFFFF</color>
 
-    <!-- Hairline separator between stacked settings rows (Settings screen). Semi-transparent
-         so it composites to a quiet ~1.4:1 line over background_sage in either theme; no
-         dedicated outline token existed to reuse. -->
+    <!-- Settings-row separator. -->
     <color name="divider">#33000000</color>
 
-    <!-- Phase: per-screen accent themes. Each screen gets a paired background + card tone.
-         Lilac -> Consent, dusty pink -> Learn to Spot It, periwinkle -> Scanner's Link
-         field. Emotional Response mixes dusty pink with the existing sage_mist. -->
+    <!-- Per screen: lilac = Consent, dusty pink = Learn, periwinkle = Scanner's link field. -->
     <color name="accent_lilac_bg">#E2DAEC</color>
     <color name="accent_lilac_card">#BEACD2</color>
     <color name="accent_dusty_pink_bg">#EEDCDE</color>
@@ -68,12 +61,9 @@
     <color name="accent_periwinkle_bg">#D4D6EC</color>
     <color name="accent_periwinkle_card">#B4B8DC</color>
 
-    <!-- Learn swipe-card fill: theme alias. Light mode reuses sage_mist (no verdict_safe
-         confusion risk here); dark mode overrides to accent_periwinkle_deep in
-         values-night (green there read too close to verdict_safe). -->
+    <!-- Alias: sage_mist in light, accent_periwinkle_deep in values-night. -->
     <color name="learn_swipe_card">@color/sage_mist</color>
 
-    <!-- Category-recap dialog card fill: theme alias. Light = accent_dusty_pink;
-         values-night overrides to cream for button contrast. -->
+    <!-- Alias: accent_dusty_pink in light, cream at night. -->
     <color name="recap_dialog_card">@color/accent_dusty_pink</color>
 </resources>

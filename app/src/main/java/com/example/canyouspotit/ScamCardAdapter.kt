@@ -12,8 +12,7 @@ class ScamCardAdapter(
     private val onAnswer: (ScamExample, Boolean, Long) -> Unit
 ) : RecyclerView.Adapter<ScamCardAdapter.CardViewHolder>() {
 
-    // Set when the current top card is bound/shown; read again when the swipe is
-    // registered, so the delta is the user's actual time-to-decision on that card.
+    // When the current top card was shown - the answer handlers diff against it for decision time.
     private var cardShownAtMs: Long = 0
 
     class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -50,9 +49,8 @@ class ScamCardAdapter(
         }
     }
 
-    // Tap-to-answer path for the on-screen "Scam" / "Legitimate" chips. Routes through the
-    // exact same onAnswer callback a swipe of the top card would fire, with the same timing
-    // basis (cardShownAtMs, set when the top card was last bound). Swipe handling untouched.
+    // Chip taps ("Scam" / "Legitimate") answer the top card through the same onAnswer
+    // callback and timing basis as a swipe.
     fun answerTopCard(userSaidLegit: Boolean) {
         if (examples.isEmpty()) return
         onAnswer(examples[0], userSaidLegit, System.currentTimeMillis() - cardShownAtMs)

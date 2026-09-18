@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Emotion-response face icon: "Suspicious already". Deliberately abstract line art -
-     not an emoji, cartoon character, or gendered face. Thin single-weight stroke only,
-     no fill. Reuses forest_shade (the app's DayNight-aware ink color). -->
+<!-- Emotion-response face icon: "Suspicious already". Strokes use forest_shade (the app's DayNight ink). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="44dp"
     android:height="44dp"
@@ -16,8 +14,7 @@
         android:strokeLineCap="round"
         android:fillColor="#00000000" />
 
-    <!-- Eyebrows: right at a slight wary angle, left flat and level (asymmetric wariness,
-         not a full angry V on both sides) -->
+    <!-- Eyebrows: right at a slight wary angle, left flat and level -->
     <path
         android:pathData="M67,78 L89,78"
         android:strokeColor="@color/forest_shade"

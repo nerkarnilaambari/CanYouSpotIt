@@ -18,7 +18,7 @@ class ConsentActivity : BaseActivity() {
 
     private val userPreferencesDao by lazy { AppDatabase.getDatabase(this).userPreferencesDao() }
 
-    // must be registered before onStart, so this is a property, not something created inside the click listener
+    // Must be registered before onStart.
     private val locationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
@@ -30,8 +30,8 @@ class ConsentActivity : BaseActivity() {
         setContentView(R.layout.activity_consent)
 
         findViewById<Button>(R.id.btnAgree).setOnClickListener {
-            // consent_given = "the consent question has been answered" (MainActivity's startup
-            // gate); data_collection_enabled = "...and the answer was yes, save my history".
+            // consent_given = the consent question was answered (MainActivity's startup gate);
+            // data_collection_enabled = the answer was yes, save history.
             getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                 .edit()
                 .putBoolean("consent_given", true)
@@ -48,9 +48,8 @@ class ConsentActivity : BaseActivity() {
         }
 
         findViewById<Button>(R.id.btnDecline).setOnClickListener {
-            // The user answered the consent question (so the startup gate must pass and this
-            // screen must not reappear) - they just answered "no" to saving history. No Room
-            // write here; the data_collection_enabled = false flag is what gates all writes.
+            // Consent question answered - the answer was just "no". No Room write;
+            // data_collection_enabled = false gates all writes.
             getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                 .edit()
                 .putBoolean("consent_given", true)
@@ -60,7 +59,7 @@ class ConsentActivity : BaseActivity() {
         }
     }
 
-    // only reached once consent has been given (via btnAgree), so this never runs without consent
+    // Only reached after consent is given via btnAgree.
     private fun detectRegionAndSave() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
@@ -95,8 +94,7 @@ class ConsentActivity : BaseActivity() {
             userPreferencesDao.insert(
                 UserPreferences(
                     consentGiven = true,
-                    detectedRegion = region,
-                    useDarkMode = false
+                    detectedRegion = region
                 )
             )
             goToMain()

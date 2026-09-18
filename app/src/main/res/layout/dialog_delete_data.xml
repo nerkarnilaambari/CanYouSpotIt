@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Shown when the user turns "Save my practice history" off. Saving has already stopped;
-     this asks, as a genuine choice, whether to also remove what was saved before.
-     Styled to the app's palette - deliberately not a system AlertDialog. -->
+     this asks whether to also remove what was saved before. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"

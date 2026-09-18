@@ -4,15 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import com.example.canyouspotit.data.AppDatabase
 import kotlinx.coroutines.launch
 
+// Activity 3, from the Scanner's Continue button: asks how the message felt before the
+// verdict was known, then shows a reflection for that (emotion, verdict) pair plus an
+// optional note. All skippable, only saved when data collection is on.
 class EmotionalResponseActivity : BaseActivity() {
 
     private val scanResultDao by lazy { AppDatabase.getDatabase(this).scanResultDao() }
-    private var scanId: Int = -1
+    private var scanId: Int = -1   // -1 = no saved scan to attach to
     private var verdict: String = "SAFE"
     private var primaryTactic: String? = null
 
@@ -23,8 +27,7 @@ class EmotionalResponseActivity : BaseActivity() {
         scanId = intent.getIntExtra("scanId", -1)
         verdict = intent.getStringExtra("verdict") ?: "SAFE"
 
-        // Fetched once here so it's ready by the time an emotion button is tapped,
-        // same pattern ScannerActivity uses for lastScanId/lastVerdict.
+        // Loads primaryTactic from the saved scan into the field up front.
         if (scanId != -1) {
             lifecycleScope.launch {
                 primaryTactic = scanResultDao.getById(scanId)?.primaryTactic
@@ -33,20 +36,23 @@ class EmotionalResponseActivity : BaseActivity() {
 
         val tvVerdictBadge = findViewById<TextView>(R.id.tvVerdictBadge)
         tvVerdictBadge.text = verdict
+        // Badge text colour, one per verdict and per theme (verdict_*_badge).
         tvVerdictBadge.setTextColor(
             when (verdict) {
-                "SCAM" -> getColor(R.color.verdict_scam)
-                "CAUTION" -> getColor(R.color.verdict_caution)
-                else -> getColor(R.color.verdict_safe)
+                "SCAM" -> getColor(R.color.verdict_scam_badge)
+                "CAUTION" -> getColor(R.color.verdict_caution_badge)
+                else -> getColor(R.color.verdict_safe_badge)
             }
         )
 
         val choicesContainer = findViewById<View>(R.id.choicesContainer)
         val reflectionContainer = findViewById<View>(R.id.reflectionContainer)
         val tvReflection = findViewById<TextView>(R.id.tvReflection)
+        val etNote = findViewById<EditText>(R.id.etNote)
         val tvSkip = findViewById<TextView>(R.id.tvSkip)
         val btnDone = findViewById<Button>(R.id.btnDone)
 
+        // Each label string is also the key reflectionFor() and saveEmotion() match on.
         val emotions = listOf(
             R.id.btnScared to "Scared or panicked",
             R.id.btnConfused to "Confused or unsure",
@@ -65,7 +71,14 @@ class EmotionalResponseActivity : BaseActivity() {
             }
         }
 
-        btnDone.setOnClickListener { goHome() }
+        btnDone.setOnClickListener {
+            // Save the note before leaving; a blank field writes null.
+            val noteText = etNote.text?.toString()
+            lifecycleScope.launch {
+                persistNote(noteText)
+                goHome()
+            }
+        }
         tvSkip.setOnClickListener { goHome() }
     }
 
@@ -111,8 +124,7 @@ class EmotionalResponseActivity : BaseActivity() {
     private fun saveEmotion(label: String) {
         val id = scanId
         if (id == -1) return
-        // Reflection text above is already shown; only the persistence is gated. A declining
-        // user has no saved scan row to attach this to anyway.
+        // The reflection already shows; only the save is gated on consent.
         if (!isDataCollectionEnabled()) return
         lifecycleScope.launch {
             val scan = scanResultDao.getById(id)
@@ -120,6 +132,16 @@ class EmotionalResponseActivity : BaseActivity() {
                 scanResultDao.update(scan.copy(emotionalResponse = label))
             }
         }
+    }
+
+    // Optional free-text note, written on "Done". A blank / whitespace-only field writes
+    // null. Gated on consent.
+    private suspend fun persistNote(rawNote: String?) {
+        val id = scanId
+        if (id == -1) return
+        if (!isDataCollectionEnabled()) return
+        val note = rawNote?.trim()?.takeIf { it.isNotEmpty() }
+        scanResultDao.updateNote(id, note)
     }
 
     private fun goHome() {

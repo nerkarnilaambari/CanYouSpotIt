@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
@@ -13,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.canyouspotit.data.AppDatabase
 import com.example.canyouspotit.data.LearningSession
@@ -48,10 +51,8 @@ class LearnActivity : BaseActivity() {
         tvOverlayExplanation = findViewById(R.id.tvOverlayExplanation)
         tvDifficultyChip = findViewById(R.id.tvDifficultyChip)
 
-        // Room's UserPreferences.detectedRegion is write-only (nothing ever reads it back);
-        // app_prefs/"region" is the actual value MainActivity's consent gate relies on, so
-        // that's the source of truth here too. Missing key (e.g. consent declined) falls
-        // back to GLOBAL, matching ConsentActivity's own GPS-failure fallback.
+        // UserPreferences.detectedRegion is write-only; app_prefs/"region" is the value read
+        // at runtime. Missing key falls back to GLOBAL.
         detectedRegion = getSharedPreferences("app_prefs", MODE_PRIVATE)
             .getString("region", "GLOBAL") ?: "GLOBAL"
 
@@ -62,9 +63,8 @@ class LearnActivity : BaseActivity() {
             resultOverlay.visibility = android.view.View.GONE
         }
 
-        // Tapping a chip is equivalent to swiping the top card that direction - it routes
-        // through the identical onAnswer path. Swipe gesture handling is unchanged.
-        // Ignored while the result overlay is up (mid-feedback).
+        // Chip taps route through the same onAnswer path as a swipe of the top card.
+        // Ignored while the result overlay is up.
         findViewById<TextView>(R.id.chipScam).setOnClickListener {
             if (resultOverlay.visibility != android.view.View.VISIBLE) {
                 adapter.answerTopCard(userSaidLegit = false)
@@ -76,9 +76,8 @@ class LearnActivity : BaseActivity() {
             }
         }
 
-        // Intercept the system back gesture/button via the modern dispatcher so we can show
-        // the all-time category recap before finishing. Callback is always enabled; the
-        // recap itself is conditionally skipped when there's nothing to celebrate yet.
+        // Intercepts the system back gesture: shows the category recap, then finishes.
+        // The recap skips itself when there's nothing to show yet.
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 showRecapThenFinish()
@@ -86,35 +85,88 @@ class LearnActivity : BaseActivity() {
         })
     }
 
-    // On leaving the Learn screen, reward learning breadth: pull every correct attempt ever
-    // recorded, resolve each back to its scam category, and show the distinct set. No scores,
-    // no counts, no pass/fail - consistent with the app's "never quiz language" principle.
+    // On the way out, shows how much the user has practised each scam category. Bar length
+    // is attempt count (correct or not). Legit examples have no scamCategory and are excluded.
     private fun showRecapThenFinish() {
         lifecycleScope.launch {
-            val categoryLabels = learningSessionDao.getAllCorrectSessions()
-                // Correctly-identified legitimate messages have no scamCategory - filter them
-                // out here; only scam categories count toward this recap.
+            val categoryCounts: List<Pair<String, Int>> = learningSessionDao.getAll()
                 .mapNotNull { session ->
                     scamExamples.firstOrNull { it.id == session.exampleId }?.scamCategory
                 }
-                .map { categoryLabel(it) }
-                .distinct()
+                .groupingBy { categoryLabel(it) }
+                .eachCount()
+                .toList()
+                .sortedWith(compareByDescending<Pair<String, Int>> { it.second }.thenBy { it.first })
 
-            if (categoryLabels.isEmpty()) {
-                // Never correctly spotted a scam yet - skip the recap entirely, no awkward
-                // empty dialog, just navigate back normally.
+            if (categoryCounts.isEmpty()) {
+                // Nothing practised yet - skip the recap and just go back.
                 finish()
                 return@launch
             }
 
-            showCategoryRecap(categoryLabels)
+            showCategoryRecap(categoryCounts)
         }
     }
 
-    private fun showCategoryRecap(categoryLabels: List<String>) {
+    private fun showCategoryRecap(categoryCounts: List<Pair<String, Int>>) {
         val content = layoutInflater.inflate(R.layout.dialog_category_recap, null)
-        content.findViewById<TextView>(R.id.tvRecapCategories).text =
-            categoryLabels.joinToString("\n") { "•  $it" }
+        val chart = content.findViewById<LinearLayout>(R.id.recapChartContainer)
+
+        // Scale each bar against the most-practised category. coerceAtLeast(1) guards the
+        // all-zero case.
+        val maxCount = (categoryCounts.maxOfOrNull { it.second } ?: 1).coerceAtLeast(1)
+        val density = resources.displayMetrics.density
+        fun dp(value: Int) = (value * density).toInt()
+
+        categoryCounts.forEachIndexed { index, (label, count) ->
+            val row = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                layoutParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                ).apply { if (index > 0) topMargin = dp(14) }
+            }
+
+            val labelView = TextView(this).apply {
+                text = label
+                setTextAppearance(R.style.TextAppearance_CanYouSpotIt_Body)
+                setTextColor(getColor(R.color.forest_shade))
+            }
+
+            val barRow = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER_VERTICAL
+                layoutParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, dp(18)
+                ).apply { topMargin = dp(6) }
+            }
+            val bar = View(this).apply {
+                setBackgroundResource(R.drawable.bg_recap_bar)
+                minimumWidth = dp(10) // a practised category always shows at least this much
+                layoutParams = LinearLayout.LayoutParams(
+                    0, ViewGroup.LayoutParams.MATCH_PARENT, count.toFloat()
+                )
+            }
+            val countView = TextView(this).apply {
+                text = count.toString()
+                setTextAppearance(R.style.TextAppearance_CanYouSpotIt_Body)
+                setTextColor(getColor(R.color.forest_shade))
+                textSize = 13f
+                layoutParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                ).apply { marginStart = dp(8) }
+            }
+            val spacer = View(this).apply {
+                layoutParams = LinearLayout.LayoutParams(0, 1, (maxCount - count).toFloat())
+            }
+            barRow.addView(bar)
+            barRow.addView(countView)
+            barRow.addView(spacer)
+
+            row.addView(labelView)
+            row.addView(barRow)
+            chart.addView(row)
+        }
 
         val dialog = Dialog(this).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -127,24 +179,21 @@ class LearnActivity : BaseActivity() {
             )
         }
 
-        // "Got it" - and any other dismissal - completes the back navigation.
+        // "Got it", or any other dismissal, completes the back navigation.
         content.findViewById<Button>(R.id.btnRecapGotIt).setOnClickListener { dialog.dismiss() }
         dialog.setOnDismissListener { finish() }
         dialog.show()
     }
 
-    // Difficulty-advancement acknowledgement - a palette-tinted Snackbar instead of a plain
-    // Toast (which renders in system styling, outside the app's design). Shared styling lives
-    // in BaseActivity.showThemedSnackbar so this and the settings screen stay consistent.
+    // Delegates to BaseActivity.showThemedSnackbar.
     private fun showDifficultySnackbar(message: String) = showThemedSnackbar(message)
 
     private fun buildDeckForLevel(level: Int): MutableList<ScamExample> {
         val tierExamples = scamExamples
             .filter { (it.region == detectedRegion || it.region == "GLOBAL") && it.difficulty == level }
             .shuffled()
-        // A region+difficulty combo could theoretically be empty (e.g. no Hard-tier IN
-        // examples). Rather than show a blank deck, fall back to the region's full pool
-        // shuffled, so the practice flow never dead-ends.
+        // A region+difficulty combo can come up empty (e.g. no Hard-tier IN examples); fall
+        // back to the region's full pool shuffled.
         return (if (tierExamples.isNotEmpty()) tierExamples
         else scamExamples.filter { it.region == detectedRegion || it.region == "GLOBAL" }.shuffled())
             .toMutableList()
@@ -187,8 +236,7 @@ class LearnActivity : BaseActivity() {
             tvOverlayCategory.visibility = android.view.View.GONE
         }
 
-        // "Fast" = answered in under FAST_ANSWER_THRESHOLD_MS. Adjust here if the
-        // coaching nudge should trigger at a different speed.
+        // Extra nudge when a wrong answer also came in fast.
         tvOverlayExplanation.text = if (!correct && decisionTimeMs < FAST_ANSWER_THRESHOLD_MS) {
             "${example.explanation} This one's easy to miss when moving quickly. Worth a second look next time."
         } else {
@@ -201,9 +249,8 @@ class LearnActivity : BaseActivity() {
 
         val levelAtAnswerTime = currentDifficulty
         lifecycleScope.launch {
-            // The correct/incorrect overlay above always shows; only the history write is
-            // gated. A declining user's session counts stay at 0, so difficulty simply
-            // never advances - the intended, graceful consequence of not saving history.
+            // The overlay always shows; only the history write is gated on consent. With no
+            // history, level counts stay at 0 and difficulty holds at the starting tier.
             if (isDataCollectionEnabled()) {
                 learningSessionDao.insert(
                     LearningSession(
@@ -217,8 +264,7 @@ class LearnActivity : BaseActivity() {
                 )
             }
 
-            // Only evaluate advancement once at least 5 cards have been answered at this
-            // level, so one lucky/unlucky early streak can't flip the tier prematurely.
+            // Only check advancement once there are 5+ answers at this level.
             val total = learningSessionDao.getTotalCountForLevel(levelAtAnswerTime)
             if (total >= 5) {
                 val correctCount = learningSessionDao.getCorrectCountForLevel(levelAtAnswerTime)
@@ -232,9 +278,7 @@ class LearnActivity : BaseActivity() {
                 }
             }
 
-            // Didn't advance this turn. If the current tier's shuffled pool has run out
-            // before the accuracy threshold was met, cycle back through the same tier's
-            // examples again (reshuffled) rather than leaving the deck empty.
+            // Didn't advance. If this tier's shuffled pool ran out, reload it reshuffled.
             if (adapter.itemCount == 0) {
                 loadDeckForLevel(currentDifficulty)
             }
@@ -262,8 +306,7 @@ class LearnActivity : BaseActivity() {
     }
 
     companion object {
-        // Threshold for the fast-wrong coaching nudge. Change this single value to
-        // adjust what counts as "moving quickly".
+        // What counts as "moving quickly" for the fast-wrong nudge.
         private const val FAST_ANSWER_THRESHOLD_MS = 2000L
     }
 }

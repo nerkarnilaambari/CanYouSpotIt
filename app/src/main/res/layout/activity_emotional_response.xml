@@ -178,10 +178,8 @@
                 app:cardBackgroundColor="@color/moss_green"
                 android:layout_marginBottom="20dp">
 
-                <!-- Reflection sentence: the one place in the app using Karla Medium
-                     Italic - the karla font-family resource has a single face (Medium
-                     Italic), so referencing it directly is unambiguous. Not used
-                     anywhere else. -->
+                <!-- The one place in the app using Karla (Medium Italic). The karla
+                     font-family has a single face. -->
                 <TextView
                     android:id="@+id/tvReflection"
                     android:layout_width="match_parent"
@@ -190,9 +188,50 @@
                     android:fontFamily="@font/karla"
                     android:textStyle="italic"
                     android:textSize="15sp"
-                    android:textColor="@color/bone"
+                    android:textColor="@color/reflection_text"
                     android:lineSpacingExtra="5dp"
                     android:padding="20dp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Optional free-text note, shown with the reflection. Leave it blank and Done
+                 just continues. -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:cardBackgroundColor="@color/cream"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Want to add anything else? (optional)"
+                        android:textAppearance="@style/TextAppearance.CanYouSpotIt.ButtonLabel"
+                        android:textColor="@color/forest_shade"
+                        android:layout_marginBottom="8dp" />
+
+                    <EditText
+                        android:id="@+id/etNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minLines="2"
+                        android:gravity="top"
+                        android:hint="Type a few words if you'd like"
+                        android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+                        android:textColor="@color/forest_shade"
+                        android:textColorHint="@color/slate_blue_grey"
+                        android:background="@android:color/transparent"
+                        android:inputType="textMultiLine|textCapSentences" />
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
