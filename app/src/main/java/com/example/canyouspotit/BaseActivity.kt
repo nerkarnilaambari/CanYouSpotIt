@@ -14,6 +14,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.google.android.material.snackbar.Snackbar
 
 // Base for every screen with UI. Hosts the light-sensor listener that switches the app
@@ -58,6 +61,18 @@ abstract class BaseActivity : AppCompatActivity(), SensorEventListener {
                 gravity = Gravity.CENTER
             }
         }.show()
+    }
+
+    // Adds the real navigation-bar inset to a scrolling screen's bottom padding, on top of
+    // whatever padding it already has, so its last element clears the bar regardless of
+    // device (gesture nav vs 3-button nav, bar height varies by manufacturer).
+    protected fun applyNavigationBarBottomInset(view: View) {
+        val basePaddingBottom = view.paddingBottom
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val navBarInset = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            v.updatePadding(bottom = basePaddingBottom + navBarInset.bottom)
+            insets
+        }
     }
 
     override fun onResume() {

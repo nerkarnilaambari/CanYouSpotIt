@@ -29,6 +29,7 @@ class ScannerActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        applyNavigationBarBottomInset(findViewById(R.id.contentColumn))
 
         val etMessage = findViewById<EditText>(R.id.etMessage)
         val etLink = findViewById<EditText>(R.id.etLink)

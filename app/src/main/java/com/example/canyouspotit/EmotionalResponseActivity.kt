@@ -23,6 +23,7 @@ class EmotionalResponseActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_emotional_response)
+        applyNavigationBarBottomInset(findViewById(R.id.contentColumn))
 
         scanId = intent.getIntExtra("scanId", -1)
         verdict = intent.getStringExtra("verdict") ?: "SAFE"

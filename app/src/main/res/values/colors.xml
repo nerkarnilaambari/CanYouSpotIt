@@ -61,6 +61,10 @@
     <color name="accent_periwinkle_bg">#D4D6EC</color>
     <color name="accent_periwinkle_card">#B4B8DC</color>
 
+    <!-- Unused in light (learn_swipe_card aliases to sage_mist here); declared so the
+         values-night override has a base fallback. -->
+    <color name="accent_periwinkle_deep">#6B70B0</color>
+
     <!-- Alias: sage_mist in light, accent_periwinkle_deep in values-night. -->
     <color name="learn_swipe_card">@color/sage_mist</color>
 
