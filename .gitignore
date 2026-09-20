@@ -12,3 +12,9 @@
 *.aab
 *.ap_
 *.dex
+
+# Release signing - keystore and credentials never go to version control.
+/keystore/
+*.jks
+*.keystore
+keystore.properties
