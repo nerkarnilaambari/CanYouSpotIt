@@ -53,48 +53,8 @@ val scamExamples = listOf(
         scamCategory = "prize_advance_fee_scam"
     ),
     ScamExample(
-        id = 5,
-        messageText = "WARNUNG: Ihr Computer wurde mit einem Virus infiziert (Fehlercode T69FS0H3). Schalten Sie den Computer nicht aus. Rufen Sie sofort den ByteShield Systems Support an: +1-702-555-0147.",
-        isScam = true,
-        explanation = "This message claims your computer has a virus and gives an urgent number to call. Real antivirus software does not ask you to call a phone number. This is a trick to get remote access to your device or your money.",
-        indicators = listOf("Artificial urgency / countdown", "Fake virus/tech-support alert", "Uses an official-sounding but unverifiable name"),
-        difficulty = 2,
-        region = "DE",
-        scamCategory = "tech_support_scam"
-    ),
-    ScamExample(
-        id = 6,
-        messageText = "WARNUNG: Ihr Computer wurde mit einem Virus infiziert (Fehlercode 001C3F06). Schalten Sie den Computer nicht aus. Rufen Sie sofort den ByteShield Systems Support an: +1-818-555-0155.",
-        isScam = true,
-        explanation = "This message claims your computer has a virus and gives an urgent number to call. Real antivirus software does not ask you to call a phone number. This is a trick to get remote access to your device or your money.",
-        indicators = listOf("Artificial urgency / countdown", "Fake virus/tech-support alert", "Uses an official-sounding but unverifiable name"),
-        difficulty = 2,
-        region = "DE",
-        scamCategory = "tech_support_scam"
-    ),
-    ScamExample(
-        id = 7,
-        messageText = "WARNUNG: Ihr Computer wurde mit einem Virus infiziert (Fehlercode DUU0XB2V). Schalten Sie den Computer nicht aus. Rufen Sie sofort den ByteShield Systems Support an: +1-702-555-0102.",
-        isScam = true,
-        explanation = "This message claims your computer has a virus and gives an urgent number to call. Real antivirus software does not ask you to call a phone number. This is a trick to get remote access to your device or your money.",
-        indicators = listOf("Artificial urgency / countdown", "Fake virus/tech-support alert", "Uses an official-sounding but unverifiable name"),
-        difficulty = 2,
-        region = "DE",
-        scamCategory = "tech_support_scam"
-    ),
-    ScamExample(
         id = 8,
         messageText = "WARNUNG: Ihr Computer wurde mit einem Virus infiziert (Fehlercode 12C2UCXG). Schalten Sie den Computer nicht aus. Rufen Sie sofort den PC Protect Services Support an: +1-617-555-0142.",
-        isScam = true,
-        explanation = "This message claims your computer has a virus and gives an urgent number to call. Real antivirus software does not ask you to call a phone number. This is a trick to get remote access to your device or your money.",
-        indicators = listOf("Artificial urgency / countdown", "Fake virus/tech-support alert", "Uses an official-sounding but unverifiable name"),
-        difficulty = 2,
-        region = "DE",
-        scamCategory = "tech_support_scam"
-    ),
-    ScamExample(
-        id = 9,
-        messageText = "WARNUNG: Ihr Computer wurde mit einem Virus infiziert (Fehlercode 8GLEFQNR). Schalten Sie den Computer nicht aus. Rufen Sie sofort den Digital Aid Systems Support an: +1-702-555-0163.",
         isScam = true,
         explanation = "This message claims your computer has a virus and gives an urgent number to call. Real antivirus software does not ask you to call a phone number. This is a trick to get remote access to your device or your money.",
         indicators = listOf("Artificial urgency / countdown", "Fake virus/tech-support alert", "Uses an official-sounding but unverifiable name"),
@@ -116,7 +76,7 @@ val scamExamples = listOf(
         id = 11,
         messageText = "Delhi Police se bol raha hoon. Congratulations! Aapne ₹40 lakh ka lottery jeeta hai. Processing fee dena hoga.",
         isScam = true,
-        explanation = "This message claims your bank account will be blocked unless you 'update your KYC' through a link. Real banks never ask you to update KYC details through a text message link. Always go to your bank's official app or branch instead.",
+        explanation = "This message impersonates police to announce a surprise lottery win, then asks for a 'processing fee' before you can collect it. Real prizes and lotteries never require an upfront payment to release winnings, and police don't call to hand out prize money. This is designed to get a payment from you for a prize that doesn't exist.",
         indicators = listOf("Unexpected prize claim", "Impersonates police, court, or a government office"),
         difficulty = 2,
         region = "IN",
@@ -193,20 +153,10 @@ val scamExamples = listOf(
         scamCategory = "police_impersonation_scam"
     ),
     ScamExample(
-        id = 19,
-        messageText = "Police headquarters se bol raha hoon. Aapka KYC pending hai. Account 2 ghante mein block ho jayega. OTP share kijiye.",
-        isScam = true,
-        explanation = "This message impersonates Amazon about an order or account problem. Amazon does not ask you to confirm personal or payment details through a text message link. Check your account directly on the Amazon app or website instead.",
-        indicators = listOf("Artificial urgency / countdown", "Threat to block or suspend account", "Asks for OTP, password, or bank/KYC details"),
-        difficulty = 2,
-        region = "IN",
-        scamCategory = "bank_kyc_otp_scam"
-    ),
-    ScamExample(
         id = 20,
         messageText = "ACP Sharma bol raha hoon. Congratulations! Aapne ₹40 lakh ka lottery jeeta hai. Processing fee dena hoga.",
         isScam = true,
-        explanation = "This message claims your bank account will be blocked unless you 'update your KYC' through a link. Real banks never ask you to update KYC details through a text message link. Always go to your bank's official app or branch instead.",
+        explanation = "This message impersonates police to announce a surprise lottery win, then asks for a 'processing fee' before you can collect it. Real prizes and lotteries never require an upfront payment to release winnings, and police don't call to hand out prize money. This is designed to get a payment from you for a prize that doesn't exist.",
         indicators = listOf("Unexpected prize claim"),
         difficulty = 2,
         region = "IN",
@@ -373,16 +323,6 @@ val scamExamples = listOf(
         scamCategory = "police_impersonation_scam"
     ),
     ScamExample(
-        id = 37,
-        messageText = "Ji namaskar Mummy main office pahunch gaya, aaj thoda late ho jaunga.",
-        isScam = false,
-        explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
-        indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
-        difficulty = 1,
-        region = "IN",
-        scamCategory = null
-    ),
-    ScamExample(
         id = 38,
         messageText = "Dhyan se suniye Papa train mein baith gaya hoon, safely pahunch jaunga.",
         isScam = false,
@@ -416,8 +356,8 @@ val scamExamples = listOf(
         id = 41,
         messageText = "Special Investigation Team se bol raha hoon. Aapke number se explicit material WhatsApp groups mein bheja ja raha hai. FIR ho chuki hai.",
         isScam = true,
-        explanation = "This message pretends a family member has been hospitalised and demands money be sent immediately. Scammers use fake family emergencies deliberately because panic stops people from checking first. Always call your family member directly before sending any money.",
-        indicators = listOf("Claims a family emergency to create panic", "Requests urgent money transfer"),
+        explanation = "This message falsely accuses you of sending explicit material and claims a police case (FIR) has already been filed, using shame and fear of legal trouble to pressure you into acting immediately. Real police do not open cases over a phone call or contact you this way - verify any such claim directly with local authorities before responding.",
+        indicators = listOf("Impersonates police, court, or a government office", "Threatens legal consequences to demand payment"),
         difficulty = 3,
         region = "IN",
         scamCategory = "police_blackmail_scam"
@@ -483,16 +423,6 @@ val scamExamples = listOf(
         scamCategory = "police_blackmail_scam"
     ),
     ScamExample(
-        id = 48,
-        messageText = "Crime Branch se bol raha hoon. Aapke father ko accident ho gaya hai. Turant 50,000 bhej dijiye hospital ke liye.",
-        isScam = true,
-        explanation = "This message impersonates Amazon about an order or account problem. Amazon does not ask you to confirm personal or payment details through a text message link. Check your account directly on the Amazon app or website instead.",
-        indicators = listOf("Artificial urgency / countdown", "Exploits fear or a fake emergency"),
-        difficulty = 2,
-        region = "IN",
-        scamCategory = "fake_emergency_scam"
-    ),
-    ScamExample(
         id = 49,
         messageText = "Madam ek minute Aapka order deliver ho chuka hai. Feedback de dena.",
         isScam = false,
@@ -533,26 +463,6 @@ val scamExamples = listOf(
         scamCategory = "bank_kyc_otp_scam"
     ),
     ScamExample(
-        id = 53,
-        messageText = "Madam ek minute Aapke father ko accident ho gaya hai. Turant 50,000 bhej dijiye hospital ke liye.",
-        isScam = true,
-        explanation = "This message claims your bank account will be blocked unless you 'update your KYC' through a link. Real banks never ask you to update KYC details through a text message link. Always go to your bank's official app or branch instead.",
-        indicators = listOf("Artificial urgency / countdown", "Exploits fear or a fake emergency"),
-        difficulty = 2,
-        region = "IN",
-        scamCategory = "fake_emergency_scam"
-    ),
-    ScamExample(
-        id = 54,
-        messageText = "Sir ek minute suniye Mummy main office pahunch gaya, aaj thoda late ho jaunga.",
-        isScam = false,
-        explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
-        indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
-        difficulty = 1,
-        region = "IN",
-        scamCategory = null
-    ),
-    ScamExample(
         id = 55,
         messageText = "Inspector Rajesh Kumar bol raha hoon. Aapke number se explicit material WhatsApp groups mein bheja ja raha hai. FIR ho chuki hai.",
         isScam = true,
@@ -585,16 +495,6 @@ val scamExamples = listOf(
     ScamExample(
         id = 58,
         messageText = "Aap sun rahe hain na? Beta ghar aa gaya hoon, darwaza khol do.",
-        isScam = false,
-        explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
-        indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
-        difficulty = 1,
-        region = "IN",
-        scamCategory = null
-    ),
-    ScamExample(
-        id = 59,
-        messageText = "Ji namaskar Mummy main office pahunch gaya, aaj thoda late ho jaunga.",
         isScam = false,
         explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
         indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
@@ -773,16 +673,6 @@ val scamExamples = listOf(
         scamCategory = "police_impersonation_scam"
     ),
     ScamExample(
-        id = 77,
-        messageText = "Notice, I remembered you mentioning the children's hospital charity gala where we ran into each other. I'm a stranded traveler right now; the hotel is asking for payment verification to extend stay. If you could assist with an emergency loan, I can provide replacement cards soon—trust building is important to me.",
-        isScam = true,
-        explanation = "This message builds trust or urgency through a believable, personalised story to manipulate you into acting fast. The more convincing and specific a message feels, the more important it is to pause and verify it independently.",
-        indicators = listOf("Artificial urgency / countdown", "Exploits fear or a fake emergency", "Uses an official-sounding but unverifiable name"),
-        difficulty = 3,
-        region = "GLOBAL",
-        scamCategory = "romance_or_stranded_traveler_scam"
-    ),
-    ScamExample(
         id = 78,
         messageText = "Dear user, your account requires verification. To restore access, reset your password and enter your username, 2FA verification code, and recovery key.",
         isScam = true,
@@ -868,16 +758,6 @@ val scamExamples = listOf(
         isScam = true,
         explanation = "This message uses urgent, pressuring language to stop you from thinking it through. Scammers rely on urgency because a calm, careful reader is much harder to trick.",
         indicators = listOf("Unexpected prize claim", "Artificial urgency / countdown"),
-        difficulty = 2,
-        region = "GLOBAL",
-        scamCategory = "account_verification_phishing"
-    ),
-    ScamExample(
-        id = 87,
-        messageText = "Attention, this is an urgent notice regarding your account. Your access will expire soon. To avoid interruption, act now and follow the instructions immediately. This is time sensitive and ends soon.",
-        isScam = true,
-        explanation = "This message uses urgent, pressuring language to stop you from thinking it through. Scammers rely on urgency because a calm, careful reader is much harder to trick.",
-        indicators = listOf("Artificial urgency / countdown", "Uses an official-sounding but unverifiable name"),
         difficulty = 2,
         region = "GLOBAL",
         scamCategory = "account_verification_phishing"
@@ -1749,16 +1629,6 @@ val scamExamples = listOf(
         explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
         indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
         difficulty = 1,
-        region = "GLOBAL",
-        scamCategory = null
-    ),
-    ScamExample(
-        id = 175,
-        messageText = "Dear Chris, your subscription has been successfully renewed. Thank you for your continued support.",
-        isScam = false,
-        explanation = "This looks like a standard subscription confirmation. It's informing you, not demanding you click a link or pay urgently.",
-        indicators = listOf("No urgent deadline or threat attached"),
-        difficulty = 2,
         region = "GLOBAL",
         scamCategory = null
     ),
