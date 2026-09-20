@@ -188,6 +188,19 @@ class LearnActivity : BaseActivity() {
     // Delegates to BaseActivity.showThemedSnackbar.
     private fun showDifficultySnackbar(message: String) = showThemedSnackbar(message)
 
+    // app_prefs, not Room - this must persist regardless of whether the user has practice
+    // history saving on, same as consent_given and region.
+    private fun hasShownHardTierCompletionMessage(): Boolean =
+        getSharedPreferences("app_prefs", MODE_PRIVATE)
+            .getBoolean("hard_tier_completion_shown", false)
+
+    private fun markHardTierCompletionMessageShown() {
+        getSharedPreferences("app_prefs", MODE_PRIVATE)
+            .edit()
+            .putBoolean("hard_tier_completion_shown", true)
+            .apply()
+    }
+
     private fun buildDeckForLevel(level: Int): MutableList<ScamExample> {
         val tierExamples = scamExamples
             .filter { (it.region == detectedRegion || it.region == "GLOBAL") && it.difficulty == level }
@@ -275,6 +288,9 @@ class LearnActivity : BaseActivity() {
                     showDifficultySnackbar("Moving to $levelName difficulty")
                     loadDeckForLevel(currentDifficulty)
                     return@launch
+                } else if (accuracy >= 0.8 && currentDifficulty == 3 && !hasShownHardTierCompletionMessage()) {
+                    markHardTierCompletionMessageShown()
+                    showDifficultySnackbar(HARD_TIER_COMPLETION_MESSAGE)
                 }
             }
 
@@ -308,5 +324,11 @@ class LearnActivity : BaseActivity() {
     companion object {
         // What counts as "moving quickly" for the fast-wrong nudge.
         private const val FAST_ANSWER_THRESHOLD_MS = 2000L
+
+        // Shown once, ever, on reaching 80%+ accuracy at Hard - the top tier, nothing to
+        // advance to.
+        private const val HARD_TIER_COMPLETION_MESSAGE =
+            "You've practiced spotting scams across every difficulty level. That kind of " +
+                "awareness is real, lasting protection."
     }
 }
