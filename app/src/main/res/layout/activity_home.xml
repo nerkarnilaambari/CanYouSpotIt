@@ -127,9 +127,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Practice spotting real scam examples"
+                    android:text="Practice scams with example messages"
                     android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
                     android:textColor="@color/forest_shade" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Learn the warning signs, so you can spot a scam when one reaches you."
+                    android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
+                    android:textColor="@color/forest_shade"
+                    android:layout_marginTop="4dp" />
 
             </LinearLayout>
 
