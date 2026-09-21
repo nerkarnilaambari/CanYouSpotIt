@@ -30,8 +30,7 @@ class ConsentActivity : BaseActivity() {
         setContentView(R.layout.activity_consent)
 
         findViewById<Button>(R.id.btnAgree).setOnClickListener {
-            // consent_given = the consent question was answered (MainActivity's startup gate);
-            // data_collection_enabled = the answer was yes, save history.
+            // consent_given tracks that the question was answered; data_collection_enabled tracks whether the answer was yes.
             getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                 .edit()
                 .putBoolean("consent_given", true)
@@ -48,8 +47,7 @@ class ConsentActivity : BaseActivity() {
         }
 
         findViewById<Button>(R.id.btnDecline).setOnClickListener {
-            // Consent question answered - the answer was just "no". No Room write;
-            // data_collection_enabled = false gates all writes.
+            // Declined: data_collection_enabled=false gates all Room writes; no row inserted here.
             getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                 .edit()
                 .putBoolean("consent_given", true)
@@ -106,7 +104,7 @@ class ConsentActivity : BaseActivity() {
     }
 }
 
-// Shared with HomeActivity's silent retry, so the IN/DE boxes live in one place.
+// Shared with HomeActivity's silent retry.
 fun classifyRegion(latitude: Double, longitude: Double): String = when {
     latitude in 8.0..37.0 && longitude in 68.0..97.0 -> "IN"
     latitude in 47.0..55.0 && longitude in 6.0..15.0 -> "DE"

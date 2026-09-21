@@ -24,8 +24,7 @@ class HomeActivity : BaseActivity() {
     private lateinit var imgPrivacyLock: ImageView
     private val userPreferencesDao by lazy { AppDatabase.getDatabase(this).userPreferencesDao() }
 
-    // SettingsActivity returns data_collection_enabled in its result Intent whenever it
-    // finishes; the privacy chip's glyph alpha follows that value.
+    // The result Intent's data_collection_enabled value drives the privacy chip's alpha.
     private val settingsLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -72,8 +71,7 @@ class HomeActivity : BaseActivity() {
         Log.d(TAG, "Privacy chip alpha set to ${imgPrivacyLock.alpha} (enabled=$enabled)")
     }
 
-    // One silent attempt per launch to resolve a region the consent flow left unresolved.
-    // Never prompts for permission; leaves region_resolved false to try again next time.
+    // Silent per-launch attempt; never prompts, leaves region_resolved false to retry later.
     private fun retryRegionDetectionIfNeeded() {
         val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
         val consentGiven = prefs.getBoolean("consent_given", false)
@@ -108,7 +106,6 @@ class HomeActivity : BaseActivity() {
                         )
                     }
                 }
-                // location == null: still unresolved, region_resolved stays false, try again next launch.
                 retryInProgress.set(false)
             }
             .addOnFailureListener {
