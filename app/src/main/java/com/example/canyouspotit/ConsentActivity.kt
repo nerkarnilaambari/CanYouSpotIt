@@ -22,7 +22,7 @@ class ConsentActivity : BaseActivity() {
     private val locationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
-        if (granted) detectRegionAndSave() else saveConsentAndRegion("GLOBAL")
+        if (granted) detectRegionAndSave() else saveConsentAndRegion("GLOBAL", regionResolved = true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,30 +64,29 @@ class ConsentActivity : BaseActivity() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {
-            saveConsentAndRegion("GLOBAL")
+            saveConsentAndRegion("GLOBAL", regionResolved = true)
             return
         }
 
         LocationServices.getFusedLocationProviderClient(this).lastLocation
             .addOnSuccessListener { location ->
-                val region = if (location != null) {
-                    when {
-                        location.latitude in 8.0..37.0 && location.longitude in 68.0..97.0 -> "IN"
-                        location.latitude in 47.0..55.0 && location.longitude in 6.0..15.0 -> "DE"
-                        else -> "GLOBAL"
-                    }
-                } else "GLOBAL"
-                saveConsentAndRegion(region)
+                if (location != null) {
+                    saveConsentAndRegion(classifyRegion(location.latitude, location.longitude), regionResolved = true)
+                } else {
+                    // No cached fix yet - HomeActivity retries with an active request later.
+                    saveConsentAndRegion("GLOBAL", regionResolved = false)
+                }
             }
             .addOnFailureListener {
-                saveConsentAndRegion("GLOBAL")
+                saveConsentAndRegion("GLOBAL", regionResolved = false)
             }
     }
 
-    private fun saveConsentAndRegion(region: String) {
+    private fun saveConsentAndRegion(region: String, regionResolved: Boolean) {
         getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
             .edit()
             .putString("region", region)
+            .putBoolean("region_resolved", regionResolved)
             .apply()
 
         lifecycleScope.launch {
@@ -105,4 +104,11 @@ class ConsentActivity : BaseActivity() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
+}
+
+// Shared with HomeActivity's silent retry, so the IN/DE boxes live in one place.
+fun classifyRegion(latitude: Double, longitude: Double): String = when {
+    latitude in 8.0..37.0 && longitude in 68.0..97.0 -> "IN"
+    latitude in 47.0..55.0 && longitude in 6.0..15.0 -> "DE"
+    else -> "GLOBAL"
 }

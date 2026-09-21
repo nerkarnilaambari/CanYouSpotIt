@@ -1,14 +1,28 @@
 package com.example.canyouspotit
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import com.example.canyouspotit.data.AppDatabase
+import com.example.canyouspotit.data.UserPreferences
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
+import java.util.concurrent.atomic.AtomicBoolean
+import kotlinx.coroutines.launch
 
 class HomeActivity : BaseActivity() {
 
     private lateinit var imgPrivacyLock: ImageView
+    private val userPreferencesDao by lazy { AppDatabase.getDatabase(this).userPreferencesDao() }
 
     // SettingsActivity returns data_collection_enabled in its result Intent whenever it
     // finishes; the privacy chip's glyph alpha follows that value.
@@ -47,13 +61,65 @@ class HomeActivity : BaseActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        retryRegionDetectionIfNeeded()
+    }
+
     // Full-opacity lock = saving on, dimmed lock = saving off.
     private fun applyPrivacyIconState(enabled: Boolean) {
         imgPrivacyLock.alpha = if (enabled) 1f else 0.45f
         Log.d(TAG, "Privacy chip alpha set to ${imgPrivacyLock.alpha} (enabled=$enabled)")
     }
 
+    // One silent attempt per launch to resolve a region the consent flow left unresolved.
+    // Never prompts for permission; leaves region_resolved false to try again next time.
+    private fun retryRegionDetectionIfNeeded() {
+        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val consentGiven = prefs.getBoolean("consent_given", false)
+        val dataCollectionEnabled = prefs.getBoolean("data_collection_enabled", false)
+        val regionResolved = prefs.getBoolean("region_resolved", true)
+        if (!consentGiven || !dataCollectionEnabled || regionResolved) return
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) return
+
+        if (!retryInProgress.compareAndSet(false, true)) return
+
+        val cancellationTokenSource = CancellationTokenSource()
+        val timeoutHandler = Handler(Looper.getMainLooper())
+        val timeoutRunnable = Runnable { cancellationTokenSource.cancel() }
+        timeoutHandler.postDelayed(timeoutRunnable, RETRY_TIMEOUT_MS)
+
+        LocationServices.getFusedLocationProviderClient(this)
+            .getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, cancellationTokenSource.token)
+            .addOnSuccessListener { location ->
+                timeoutHandler.removeCallbacks(timeoutRunnable)
+                if (location != null) {
+                    val region = classifyRegion(location.latitude, location.longitude)
+                    prefs.edit()
+                        .putString("region", region)
+                        .putBoolean("region_resolved", true)
+                        .apply()
+                    lifecycleScope.launch {
+                        userPreferencesDao.insert(
+                            UserPreferences(consentGiven = true, detectedRegion = region)
+                        )
+                    }
+                }
+                // location == null: still unresolved, region_resolved stays false, try again next launch.
+                retryInProgress.set(false)
+            }
+            .addOnFailureListener {
+                timeoutHandler.removeCallbacks(timeoutRunnable)
+                retryInProgress.set(false)
+            }
+    }
+
     companion object {
         private const val TAG = "HomeActivity"
+        private const val RETRY_TIMEOUT_MS = 10_000L
+        private val retryInProgress = AtomicBoolean(false)
     }
 }
