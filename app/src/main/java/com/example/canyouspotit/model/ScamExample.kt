@@ -64,7 +64,7 @@ val scamExamples = listOf(
     ),
     ScamExample(
         id = 10,
-        messageText = "WARNUNG: Ihr Computer wurde mit einem Virus infiziert (Fehlercode QXMSVWKY). Schalten Sie den Computer nicht aus. Rufen Sie sofort den TechGuard Support Support an: +1-305-555-0112.",
+        messageText = "WARNUNG: Ihr Computer wurde mit einem Virus infiziert (Fehlercode QXMSVWKY). Schalten Sie den Computer nicht aus. Rufen Sie sofort den TechGuard Support an: +1-305-555-0112.",
         isScam = true,
         explanation = "This message claims your computer has a virus and gives an urgent number to call. Real antivirus software does not ask you to call a phone number. This is a trick to get remote access to your device or your money.",
         indicators = listOf("Artificial urgency / countdown", "Fake virus/tech-support alert", "Uses an official-sounding but unverifiable name"),
@@ -793,26 +793,6 @@ val scamExamples = listOf(
         scamCategory = "account_verification_phishing"
     ),
     ScamExample(
-        id = 91,
-        messageText = "Boy; I love u Grl: Hogolo Boy: gold chain kodstini Grl: Agalla Boy: necklace madstini Grl: agalla Boy: Hogli 1 mutai eerulli kodthini! Grl: I love U kano;-)",
-        isScam = false,
-        explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
-        indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
-        difficulty = 1,
-        region = "GLOBAL",
-        scamCategory = null
-    ),
-    ScamExample(
-        id = 92,
-        messageText = "Ola would get back to you maybe not today but I ve told him you can be his direct link in the US in getting cars he bids for online, you arrange shipping and you get a cut. Or U????? For a partnership where U????? Invest money for shipping and he takes care of the rest!U??Wud b self reliant soon dnt worry",
-        isScam = false,
-        explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
-        indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
-        difficulty = 2,
-        region = "GLOBAL",
-        scamCategory = null
-    ),
-    ScamExample(
         id = 93,
         messageText = "LOL what happens in Vegas stays in vegas",
         isScam = false,
@@ -837,26 +817,6 @@ val scamExamples = listOf(
         messageText = "Hey you gave them your photo when you registered for driving ah? Tmr wanna meet at yck?",
         isScam = false,
         explanation = "This is a routine event invitation. Attendance is optional and it doesn't ask for money or sensitive information.",
-        indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
-        difficulty = 1,
-        region = "GLOBAL",
-        scamCategory = null
-    ),
-    ScamExample(
-        id = 96,
-        messageText = "Hi babe its me thanks for coming even though it didnt go that well!i just wanted my bed! Hope to see you soon love and kisses xxx",
-        isScam = false,
-        explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
-        indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
-        difficulty = 1,
-        region = "GLOBAL",
-        scamCategory = null
-    ),
-    ScamExample(
-        id = 97,
-        messageText = "Go chase after her and run her over while she's crossing the street",
-        isScam = false,
-        explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
         indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
         difficulty = 1,
         region = "GLOBAL",
@@ -925,16 +885,6 @@ val scamExamples = listOf(
     ScamExample(
         id = 104,
         messageText = "Ugh hopefully the asus ppl dont randomly do a reformat.",
-        isScam = false,
-        explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
-        indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
-        difficulty = 1,
-        region = "GLOBAL",
-        scamCategory = null
-    ),
-    ScamExample(
-        id = 105,
-        messageText = "Lol ... Oh no babe, I wont be sliding into your place after midnight, but thanks for the invite",
         isScam = false,
         explanation = "This message is ordinary and doesn't pressure you to click a link, share personal details, or send money. That's a good sign it's genuine.",
         indicators = listOf("No pressure, no suspicious links, no money or OTP request"),
@@ -1414,7 +1364,7 @@ val scamExamples = listOf(
     ),
     ScamExample(
         id = 153,
-        messageText = "Sie haben einen Betrugsversuch erholfen! Geben Sie Ihre Bankdaten auf diese Seite ein, um Ihr Konto zu blockieren.",
+        messageText = "Wir haben einen Betrugsversuch auf Ihrem Konto festgestellt! Geben Sie Ihre Bankdaten auf diese Seite ein, um Ihr Konto zu blockieren.",
         isScam = true,
         explanation = "This message either asks for your bank details directly or promises a big financial reward if you pay or transfer money first. Real banks and legitimate offers never work this way. Treat any message asking for money upfront or account details as a serious red flag.",
         indicators = listOf("Threat to block or suspend account", "Asks for OTP, password, or bank/KYC details"),
