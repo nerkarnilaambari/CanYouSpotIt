@@ -41,21 +41,18 @@ class ScannerActivity : BaseActivity() {
         val tvActionStep = findViewById<TextView>(R.id.tvActionStep)
         val btnContinue = findViewById<Button>(R.id.btnContinue)
 
-        // Once a result shows, the inputs collapse: the Message box shrinks to a 2-line
-        // preview and the empty Link card hides. Editing either field expands them again.
+        // Once a result shows, the inputs collapse: the Message box shrinks to a 1-line
+        // minimum preview and the empty Link card hides. Editing either field expands them again.
         val defaultMessageMinLines = etMessage.minLines
-        val defaultMessageMaxLines = etMessage.maxLines
 
         fun collapseInputsForResult() {
             etMessage.minLines = 1
-            etMessage.maxLines = 2
             etMessage.setSelection(0) // show the start of the message in the collapsed preview
             if (etLink.text.isNullOrBlank()) cardLink.visibility = View.GONE
         }
 
         fun expandInputs() {
             etMessage.minLines = defaultMessageMinLines
-            etMessage.maxLines = defaultMessageMaxLines
             cardLink.visibility = View.VISIBLE
         }
 

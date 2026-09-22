@@ -58,7 +58,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minLines="4"
-                    android:maxLines="6"
                     android:gravity="top"
                     android:hint="Paste the WhatsApp, SMS, or email text here"
                     android:textAppearance="@style/TextAppearance.CanYouSpotIt.Body"
