@@ -18,13 +18,13 @@ val releaseKeystoreProperties = Properties().apply {
 android {
     namespace = "com.example.canyouspotit"
     compileSdk {
-        version = release(37)
+        version = release(36)
     }
 
     defaultConfig {
         applicationId = "com.example.canyouspotit"
         minSdk = 34
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
