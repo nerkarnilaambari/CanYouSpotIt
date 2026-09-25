@@ -6,7 +6,7 @@ An offline Android app that helps people practice recognizing scam messages and 
 Nilambari Jaywant Nerkar and Asish Chellamani
 
 ## Course
-Mobile Systems, 2026, FH Schmalkalden
+Mobile Systems, 2026, FH Schmalkalden (Schmalkalden University Of Applied Science)
 
 ## Features
 - **Scanner**: paste a message and get an instant Safe, Caution, or Likely Scam verdict, with an explanation of what to look for.
