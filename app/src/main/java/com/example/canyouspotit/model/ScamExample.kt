@@ -1084,7 +1084,7 @@ val scamExamples = listOf(
     ),
     ScamExample(
         id = 125,
-        messageText = "You have a new connection request on our community app! Reply YES-440 or NO-440 to see who added you: www.sms.ac/u/nat27081980. To stop, text STOP FRND to 62468",
+        messageText = "You have a new connection request on our community app! Reply YES-440 or NO-440 to see who added you: www.sms.ac/u/natXXXXXXXX. To stop, text STOP FRND to 62468",
         isScam = true,
         explanation = "This is a spam message imitating a social app notification to get you to reply to a paid text number. Replying can lead to ongoing premium-rate charges. Don't reply, just delete it.",
         indicators = listOf("Suspicious or shortened link", "Reply triggers a premium-rate charge"),
