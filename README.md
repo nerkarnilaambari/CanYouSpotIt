@@ -43,4 +43,6 @@ A signed release APK is available on the [v1.0 Release](../../releases/tag/v1.0)
 - You can turn history saving off, export your data, or delete it at any time in Settings.
 
 ## Data sources
-[SOURCE AND LICENSE]
+The practice examples in Learn to Spot It were compiled and adapted from
+  several open-source spam and phishing message datasets. Phone numbers, links and other identifying details have been masked. Detailed source attribution will
+  be added in a future update.
